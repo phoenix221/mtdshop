@@ -13,13 +13,6 @@
                 // "/var/www/html": "${workspaceFolder}/www" // if you have opened VSCODE in root folder
                 "/var/www/html/mtdshop": "${workspaceFolder}" // if you have opened VSCODE in ./www folder
               }
-        },
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Запустить Chrome на localhost",
-            "url": "http://mtdshop",
-            "webRoot": "${workspaceFolder}"
         }
     ]
 }
