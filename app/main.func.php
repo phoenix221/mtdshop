@@ -10,6 +10,7 @@ function main()
 	}
     
     d()->o = d()->Option;
+    d()->page_list = d()->Page->where('is_menu = 1');
 
 	d()->content = d()->content();
 	print d()->render('main_tpl');
@@ -93,3 +94,16 @@ function getex($filename) {
     return end(explode(".", $filename));
 }
 // загрузка картинок для CK Editor
+
+function ajax_menu(){
+    $page_list = d()->Page->where('is_menu = 1');
+    $result = Array();
+    $i =0;
+    foreach ($page_list as $key=>$value){
+        $result[$i]['link'] = $value->url;
+        $result[$i]['name'] = $value->name_link;
+        $i++;
+    }
+
+    return json_encode($result);
+}

@@ -18,31 +18,31 @@
 <body>
 {{admin_panel}}
 <header>
-    <div class="container">
-        <div class="header1">
-            <p class="adress">
-                <i class="mdi mdi-map-marker"></i> г. Казань, ул. Айвазовского, 54
-            </p>
-            <p class="phone">+7 (999) 999-99-99</p>
-            <p class="email">mtdgroup@mtdgroup.ru</p>
-            <p>
+    <div class="header1">
+        <div class="container">
+            <div class="header-body">
+                <p class="adress"><i class="mdi mdi-map-marker"></i>{o.address}</p>
+                <p class="phone"><a href="tel:{o.phone}"><i class="mdi mdi-phone"></i>{o.phone}</a></p>
+                <p class="email"><a href="mailto:{o.email}}"><i class="mdi mdi-email"></i>{o.email}</a></p>
                 <button class="btn btn-default"><i class="mdi mdi-account"></i>Войти</button>
-            </p>
+            </div>
         </div>
     </div>
-    <hr>
-    <div class="container">
-        <div class="header2">
-            <p class="logo"><img src="{.logo}" alt="Logo"></p>
-            <p class="header-search">
-                <form>
-                    <input type="text">
-                    <button><i class="mdi mdi-magnify"></i></button>
-                </form>
-            </p>
-            <p><button class="btn btn-link">Заказать звонок</button></p>
+    <div class="header2">
+        <div class="container">
+            <div class="header-body">
+                <img src="{o.logo}" class="logo" alt="Logo">
+                <div class="header-search">
+                    <form method="get" action="/search/">
+                        <input type="text" placeholder="Найти товар">
+                        <button><i class="mdi mdi-magnify"></i></button>
+                    </form>
+                </div>
+                <button class="btn btn-link btn-request">Заказать звонок</button>
+            </div>
         </div>
     </div>
+    <navbar id="nav"></navbar>
 </header>
 <div id="root"></div> 
 <div id="list"></div> 

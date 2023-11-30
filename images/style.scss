@@ -15,19 +15,33 @@
 }
 
 $font-famaly: 'Roboto', sans-serif;
+$color1: #7c3d8e;
+$color2: #393185;
+$color3: #9f6dac;
+%size16{
+    font-size: 16px;
+    line-height: 20px;
+}
+%hover{
+    &:hover, &:focus, &:active{
+        color: #948beb;
+    }
+}
 
 html, body
 {
 	margin:0;
 	padding:0;
+    background: #fff;
+    font-family: $font-famaly;
+    font-size: 14px;
+    font-weight: 400;
 }
-
 a img, a
 {
 	border:none;
 	outline:none;
 }
-
 .clear
 {
 	clear:both;
@@ -42,16 +56,115 @@ h1, h2, h3{
 p, a{
 	font-family: $font-famaly;
 	font-weight: 400;
+    color: #000;
+}
+a{
+    text-decoration: none;
+}
+i{
+    margin-right: 5px;
 }
 small{
 	font-family: $font-famaly;
 	font-weight: 300;
 }
-.header1, .header2{
+.header-body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 0;
+
+    p{
+        padding-top: 12px;
+    }
 }
+.logo{
+    width: 125px;
+    height: auto;
+}
+.header2{
+    background: $color1;
+}
+.header-search{
+    width: 80%;
+    padding: 0 50px;
+    display: inline-block;
+    form{
+        position: relative;
+        input{
+            width: 100%;
+            padding: 10px 15px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 25px;
+            opacity: .75;
+        }
+        button{
+            margin: 2px;
+            position: absolute;
+            right: 0;
+            border: 2px solid $color3;
+            border-radius: 25px;
+            width: 50px;
+            height: 37px;
+
+            i{
+                font-size: 23px;
+                line-height: 28px;
+                color: $color3;
+                margin-left: 5px;
+            }
+        }
+    }
+} 
+.btn-request{
+    width: 150px;
+    font-size: 14px;
+    color: $color3;
+    font-weight: 600;
+
+    @extend %hover;
+}
+div.nav-item.dropdown{
+    min-width: 250px;
+    background: #b0afaf;
+    border-radius: 15px;
+    padding: 3px 15px;
+}
+.dropdown-menu.show{
+    min-width: 250px;
+}
+a.dropdown-toggle{
+    color: #fff !important;
+    margin: 0;
+
+    &:hover, &:focus, &:active{
+        color: #fff !important;
+    }
+    &::after{
+        border-top: 0.4em solid;
+        border-right: 0.4em solid transparent;
+        border-left: 0.4em solid transparent;
+        margin-top: 8px;
+        float: right;
+    }
+}
+.navbar-nav, .dropdown-item{
+    @extend %size16;
+}
+.dropdown-item{
+    margin: 5px 0;
+
+    &:hover, &:active, &:focus{
+        border-left: 4px solid $color3;
+    }
+}
+.nav-link{
+    margin: 0 12px;
+
+    @extend %hover;
+}
+
 
 

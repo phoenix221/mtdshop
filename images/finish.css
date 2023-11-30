@@ -13,9 +13,22 @@
   font-family: Roboto;
   src: url("/images/fonts/Roboto-Light.ttf");
 }
+.navbar-nav, .dropdown-item {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.nav-link:hover, .btn-request:hover, .nav-link:focus, .btn-request:focus, .nav-link:active, .btn-request:active {
+  color: #948beb;
+}
+
 html, body {
   margin: 0;
   padding: 0;
+  background: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 a img, a {
@@ -38,6 +51,15 @@ h1, h2, h3 {
 p, a {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
+  color: #000;
+}
+
+a {
+  text-decoration: none;
+}
+
+i {
+  margin-right: 5px;
 }
 
 small {
@@ -45,11 +67,100 @@ small {
   font-weight: 300;
 }
 
-.header1, .header2 {
+.header-body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 0;
+}
+.header-body p {
+  padding-top: 12px;
+}
+
+.logo {
+  width: 125px;
+  height: auto;
+}
+
+.header2 {
+  background: #7c3d8e;
+}
+
+.header-search {
+  width: 80%;
+  padding: 0 50px;
+  display: inline-block;
+}
+.header-search form {
+  position: relative;
+}
+.header-search form input {
+  width: 100%;
+  padding: 10px 15px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 25px;
+  opacity: 0.75;
+}
+.header-search form button {
+  margin: 2px;
+  position: absolute;
+  right: 0;
+  border: 2px solid #9f6dac;
+  border-radius: 25px;
+  width: 50px;
+  height: 37px;
+}
+.header-search form button i {
+  font-size: 23px;
+  line-height: 28px;
+  color: #9f6dac;
+  margin-left: 5px;
+}
+
+.btn-request {
+  width: 150px;
+  font-size: 14px;
+  color: #9f6dac;
+  font-weight: 600;
+}
+
+div.nav-item.dropdown {
+  min-width: 250px;
+  background: #b0afaf;
+  border-radius: 15px;
+  padding: 3px 15px;
+}
+
+.dropdown-menu.show {
+  min-width: 250px;
+}
+
+a.dropdown-toggle {
+  color: #fff !important;
+  margin: 0;
+}
+a.dropdown-toggle:hover, a.dropdown-toggle:focus, a.dropdown-toggle:active {
+  color: #fff !important;
+}
+a.dropdown-toggle::after {
+  border-top: 0.4em solid;
+  border-right: 0.4em solid transparent;
+  border-left: 0.4em solid transparent;
+  margin-top: 8px;
+  float: right;
+}
+
+.dropdown-item {
+  margin: 5px 0;
+}
+.dropdown-item:hover, .dropdown-item:active, .dropdown-item:focus {
+  border-left: 4px solid #9f6dac;
+}
+
+.nav-link {
+  margin: 0 12px;
 }
 
 /*# sourceMappingURL=finish.css.map */

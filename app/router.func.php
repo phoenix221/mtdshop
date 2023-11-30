@@ -10,6 +10,8 @@ route('/get/server', 'main', 'get_server');
 route('/get/session', 'main', 'get_session');
 route('/ajax/ckupload', 'main', 'ajax_ckupload');
 
+route('/ajax/menu', 'main', 'ajax_menu');
+
 
 //route('/news/index', 'content', 'news#index');
 //route('/news/index', 'news#index');
