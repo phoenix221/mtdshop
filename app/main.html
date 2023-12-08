@@ -43,10 +43,57 @@
         </div>
     </div>
     <navbar id="nav"></navbar>
-</header>
-<div id="root"></div> 
-<div id="list"></div> 
+</header> 
 {{{content}}}
+<footer>
+    <div class="container">
+        <div class="footer-blok">
+            <div class="footer-items">
+                <p class="f-title">Компания</p>
+                <ul>
+                    <li><a href="">О компании</a></li>
+                    <li><a href="">Реквезиты</a></li>
+                    <li><a href="">Контакты</a></li>
+                    <li><a href="">Пользовательское соглашение</a></li>
+                    <li><a href="">Политика обработки персональных данных</a></li>
+                </ul>
+            </div>
+            <div class="footer-items">
+                <p class="f-title">Каталог</p>
+                <ul>
+                    <foreach category_list>
+                        <li><a href="">{.title}</a></li>
+                    </foreach>
+                </ul>
+            </div>
+            <div class="footer-items">
+                <p class="f-title">Информация</p>
+                <ul>
+                    <foreach pages_list>
+                        <li><a href="">{.name_link}}</a></li>
+                    </foreach>
+                </ul>
+            </div>
+            <div class="footer-items">
+                <p class="f-title">Контакты</p>
+                <ul>
+                    <li>{o.address}</li>
+                    <li>{o.email}</li>
+                    <li>{o.phone}</li>
+                    <li><button class="btn btn-link">Заказать звонок</button></li>
+                </ul>
+                <p class="social">
+                    <ul>
+                        <li>vk</li>
+                        <li>tg</li>
+                        <li>wp</li>
+                        <li>inst</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>

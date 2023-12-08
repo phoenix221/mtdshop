@@ -14,7 +14,7 @@ class MenuDropdown extends React.Component {
     }
 
     componentDidMount(){
-        axios.get('/ajax/menu').then(res=>{
+        axios.get('/ajax/category').then(res=>{
             console.log(res);
             console.log(res.data);
             const products = res.data;

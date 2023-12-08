@@ -163,4 +163,39 @@ a.dropdown-toggle::after {
   margin: 0 12px;
 }
 
+footer {
+  background: #7c3d8e;
+  padding: 50px 0;
+}
+
+.footer-blok {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.f-title {
+  font-size: 18px;
+  line-height: 20px;
+  color: #e1e0e0;
+}
+
+.footer-items {
+  width: 25%;
+}
+.footer-items ul {
+  padding: 0;
+}
+.footer-items ul li {
+  list-style: none;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 3px 0;
+  color: #e1e0e0;
+}
+.footer-items ul li a {
+  color: #e1e0e0;
+}
+
 /*# sourceMappingURL=finish.css.map */
