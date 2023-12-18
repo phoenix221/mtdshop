@@ -15,8 +15,6 @@ class MenuDropdown extends React.Component {
 
     componentDidMount(){
         axios.get('/ajax/category').then(res=>{
-            console.log(res);
-            console.log(res.data);
             const products = res.data;
             this.setState({ products });
         })
@@ -37,7 +35,6 @@ class MenuLink extends React.Component{
     }
     componentDidMount(){
         axios.get('/ajax/menu').then(res=>{
-            console.log(res.data);
             const menu = res.data;
             this.setState({ menu });
         })
@@ -68,3 +65,39 @@ class Menu extends React.Component{
 
 const root = ReactDOM.createRoot(document.getElementById('nav'));
 root.render(<Menu />);
+
+const Carousel = ReactBootstrap.Carousel;
+
+class Slides extends React.Component{
+    state = {
+        slides: []
+    }
+    componentDidMount(){
+        axios.get('/ajax/slides').then(res=>{
+            console.log(res.data);
+            const slides = res.data;
+            this.setState({ slides });
+        })
+    }
+    render(){
+        return(
+            <Carousel>
+                {this.state.slides.map(sl => 
+                    <Carousel.Item>
+                        <img
+                            className="carusel-main"
+                            src={sl.image}
+                            alt="First slide"
+                        />
+                        <Carousel.Caption>
+                            <p className="slide-tlt">{sl.title}</p>
+                            <a href={sl.link} className="slide-btn">Подробнее</a>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                )}
+            </Carousel>
+        );
+    }
+}
+const main_slide = ReactDOM.createRoot(document.getElementById('slide'));
+main_slide.render(<Slides />);

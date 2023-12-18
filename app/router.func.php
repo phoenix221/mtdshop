@@ -12,8 +12,8 @@ route('/catalog/', 'products#index');
 route('/sales/index', 'sales#index');
 route('/sales/', 'sales#show');
 
-route('/uslugi/index', 'service#index');
-route('/uslugi/', 'service#show');
+route('/uslugi/index', 'services#index');
+route('/uslugi/', 'services#show');
 
 route('/get/server', 'main', 'get_server');
 route('/get/session', 'main', 'get_session');
@@ -21,6 +21,7 @@ route('/ajax/ckupload', 'main', 'ajax_ckupload');
 
 route('/ajax/menu', 'main', 'ajax_menu');
 route('/ajax/category', 'main', 'ajax_category');
+route('/ajax/slides', 'main', 'ajax_slides');
 route('/ajax/check_url_genereator', 'main', 'ajax_check_url_genereator');
 
 

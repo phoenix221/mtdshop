@@ -21,28 +21,43 @@
     <div class="header1">
         <div class="container">
             <div class="header-body">
-                <p class="adress"><i class="mdi mdi-map-marker"></i>{o.address}</p>
-                <p class="phone"><a href="tel:{o.phone}"><i class="mdi mdi-phone"></i>{o.phone}</a></p>
-                <p class="email"><a href="mailto:{o.email}}"><i class="mdi mdi-email"></i>{o.email}</a></p>
-                <button class="btn btn-default"><i class="mdi mdi-account"></i>Войти</button>
+                <div class="header-block-left">
+                    <p class="phone"><a href="tel:{o.phone}"><i class="mdi mdi-phone"></i>{o.phone}</a></p>
+                    <p class="email"><a href="mailto:{o.email}}"><i class="mdi mdi-email"></i>{o.email}</a></p>
+                </div>
+                <div class="header-block-right">
+                    <a href="/favorites/"><i class="mdi mdi-heart"></i>Избранное</a>
+                    <a href="#" class="auth-btn"><i class="mdi mdi-account"></i>Войти</a>
+                </div>
+                
             </div>
         </div>
     </div>
     <div class="header2">
         <div class="container">
             <div class="header-body">
-                <img src="{o.logo}" class="logo" alt="Logo">
+                <a href="/"><img src="{o.logo}" class="logo" alt="Logo"></a>
                 <div class="header-search">
                     <form method="get" action="/search/">
                         <input type="text" placeholder="Найти товар">
                         <button><i class="mdi mdi-magnify"></i></button>
                     </form>
                 </div>
-                <button class="btn btn-link btn-request">Заказать звонок</button>
+                <a href="/order/" class="btn-cart"><i class="mdi mdi-cart-outline"></i></a>
             </div>
         </div>
     </div>
     <navbar id="nav"></navbar>
+    <div class="block-requerst">
+        <div class="block-orders">
+            <a href="/order/" class="btn-cart-mb"><i class="mdi mdi-cart-outline"></i></a>
+            <span class="tooltiptext-orders">Перейти в корзину</span>
+        </div>
+        <div class="block-feedback">
+            <button class="btn-feedback"><i class="mdi mdi-message-alert"></i></button>
+            <span class="tooltiptext">Заказать звонок</span>
+        </div>
+    </div>
 </header> 
 {{{content}}}
 <footer>
@@ -62,15 +77,15 @@
                 <p class="f-title">Каталог</p>
                 <ul>
                     <foreach category_list>
-                        <li><a href="">{.title}</a></li>
+                        <li><a href="{.link}">{.title}</a></li>
                     </foreach>
                 </ul>
             </div>
             <div class="footer-items">
                 <p class="f-title">Информация</p>
                 <ul>
-                    <foreach pages_list>
-                        <li><a href="">{.name_link}}</a></li>
+                    <foreach page_list>
+                        <li><a href="{.link}">{.name_link}</a></li>
                     </foreach>
                 </ul>
             </div>
@@ -78,18 +93,24 @@
                 <p class="f-title">Контакты</p>
                 <ul>
                     <li>{o.address}</li>
-                    <li>{o.email}</li>
-                    <li>{o.phone}</li>
-                    <li><button class="btn btn-link">Заказать звонок</button></li>
+                    <li><a href="mailto:{o.email}">{o.email}</a></li>
+                    <li><a href="tel:{o.phone}">{o.phone}</a></li>
+                    <li><a href="#">Заказать звонок</a></li>
                 </ul>
-                <p class="social">
-                    <ul>
-                        <li>vk</li>
-                        <li>tg</li>
-                        <li>wp</li>
-                        <li>inst</li>
-                    </ul>
-                </p>
+                <ul class="social">
+                    @if(d()->o->vk_link):
+                    <li><a href="{o.vk_link}"><i class="mdi mdi-vk"></i></a></li>
+                    @endif;
+                    @if(d()->o->telegram_link):
+                    <li><a href="{o.telegram_link}"><i class="mdi mdi-telegram"></i></a></li>
+                    @endif;
+                    @if(d()->o->whatsapp_link):
+                    <li><a href="{o.whatsapp_link}"><i class="mdi mdi-whatsapp"></i></a></li>
+                    @endif;
+                    @if(d()->o->instagram_link):
+                    <li><a href="{o.instagram_link}"><i class="mdi mdi-instagram"></i></a></li>
+                    @endif;
+                </ul>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
 /*
 	Модуль для работы с текстовыми страницами, для вывода меню, выода подстраниц
 */
-class Service extends ActiveRecord
+class Slide extends ActiveRecord
 {
 	
 	function active()
@@ -13,8 +13,8 @@ class Service extends ActiveRecord
 		return '<strong style="color:orange">Нет</strong>';
 	}
 
-	function link(){
-		return $this->get('url').'/';
-	}
+    function link(){
+        return '/'.$this->get('url');
+    }
 }
 

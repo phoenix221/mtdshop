@@ -14,7 +14,7 @@ class Product extends ActiveRecord
 	}
 
 	function link(){
-		
+		return $this->get('url').'/';
 	}
 }
 

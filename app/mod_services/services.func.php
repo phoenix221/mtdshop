@@ -2,15 +2,15 @@
 /*
 	Модуль для работы с текстовыми страницами, для вывода меню, выода подстраниц
 */
-class SalesController
+class ServicesController
 {
     function index(){
-        d()->sales_list = d()->Sale->where('is_active = 1');
+        d()->services_list = d()->Service->where('is_active = 1');
         print d()->view();
     }
 
     function show(){
-        d()->this = d()->Sale(url(2))->where('is_active = 1');
+        d()->this = d()->Service(url(2))->where('is_active = 1');
         print d()->view();
     }
 }

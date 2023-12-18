@@ -11,6 +11,7 @@ function main()
     
     d()->o = d()->Option;
     d()->page_list = d()->Page->where('is_menu = 1');
+    d()->category_list = d()->Category->where('is_active = 1');
 
 	d()->content = d()->content();
 	print d()->render('main_tpl');
@@ -140,4 +141,18 @@ function ajax_check_url_genereator(){
         exit;
     }
     d()->page_not_found();
+}
+
+function ajax_slides(){
+    $slides_list = d()->Slide->where('is_active = 1');
+    $res = Array();
+    $i = 0;
+    foreach ($slides_list as $k_sl=>$v_sl){
+        $res[$i]['image'] = $v_sl->image;
+        $res[$i]['title'] = $v_sl->title;
+        $res[$i]['link'] = $v_sl->link;
+        $i++;
+    }
+
+    return json_encode($res);
 }

@@ -12,5 +12,9 @@ class Sale extends ActiveRecord
 		}
 		return '<strong style="color:orange">Нет</strong>';
 	}
+
+	function link(){
+		return $this->get('url').'/';
+	}
 }
 

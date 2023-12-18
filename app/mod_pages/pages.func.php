@@ -6,7 +6,7 @@ class PagesController
 {
 	function show()
 	{
-		$url = url();
+		$url = url(1);
 		d()->this = d()->Page->find_by_url($url);
 		if (d()->this->is_empty || url(2)!='index') {
 			if(substr(url(), -6)!='/index'){
