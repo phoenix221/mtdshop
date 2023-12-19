@@ -8,7 +8,7 @@ const  NavDropdown = ReactBootstrap.NavDropdown;
 const  Button = ReactBootstrap.Button;
 const axios = axios;
 
-class MenuDropdown extends React.Component {
+/*class MenuDropdown extends React.Component {
     state = {
         products: []
     }
@@ -64,7 +64,7 @@ class Menu extends React.Component{
 }
 
 const root = ReactDOM.createRoot(document.getElementById('nav'));
-root.render(<Menu />);
+root.render(<Menu />);*/
 
 const Carousel = ReactBootstrap.Carousel;
 

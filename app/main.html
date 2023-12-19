@@ -47,7 +47,25 @@
             </div>
         </div>
     </div>
-    <navbar id="nav"></navbar>
+    <nav id="nav">
+        <div class="container">
+            <div class="navbar">
+                <div class="nav-catalog">
+                    <span>Каталог <i class="mdi mdi-menu"></i></span>
+                    <ul class="sidebar">
+                        <foreach category_list>
+                            <li><a href="{.link}">{.title}</a></li>
+                        </foreach>
+                    </ul>
+                </div>
+                <ul>
+                    <foreach page_list>
+                        <li><a href="{.link}">{.title}</a></li>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="block-requerst">
         <div class="block-orders">
             <a href="/order/" class="btn-cart-mb"><i class="mdi mdi-cart-outline"></i></a>
