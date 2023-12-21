@@ -1,5 +1,19 @@
 <ul>
     <foreach product_list>
-        <li><a href="{.link}">{.title}</a></li>
+        <li class="product_cart">
+            <img src="{.image}" alt="">
+            <div class="cart_block_text">
+                <a href="{.link}" class="cart-title">{.title}</a>
+                <p>{.text}</p>
+                <hr>
+                <p>{.charact}</p>
+            </div>
+            <div class="cart_block_price">
+                @d()->price = number_format(d()->this->price, 0, '',' ');
+                <p class="cart-price">{price} <span class="mdi mdi-currency-rub"></span></p>
+                <div id="amount"></div>
+                <div id="in_cart"></div>
+            </div>
+        </li>
     </foreach>
 </ul>

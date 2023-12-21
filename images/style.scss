@@ -519,3 +519,64 @@ footer{
 .block-orders:hover .tooltiptext-orders{
     display: block;
 }
+.main-block-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    li{
+        list-style: none;
+        margin: 0 5px;
+        height: 35px;
+        &:first-child{
+            margin-left: 0;
+        }
+
+        button{
+            border: none;
+            background: none;
+            font-size: 16px;
+            line-height: 20px;
+            padding: 2px 5px;
+
+            &:hover, &:focus, &:active{
+                border-bottom: 2px solid #000;
+            }
+        }
+    }
+}
+.product_cart{
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-top: 1px solid $color4;
+    border-bottom: 1px solid $color4;
+    padding: 25px 0;
+
+    &:first-child{
+        border-top: none;
+    }
+    &:last-child{
+        border-bottom: none;
+    }
+    img{
+        width: 200px;
+        height: auto;
+    }
+}
+.cart_block_text{
+    width: 500px;
+
+    p{
+        text-align: justify;
+    }
+}
+.cart-title{
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 600;
+}

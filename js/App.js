@@ -1,71 +1,9 @@
 'use strict';
 
 const e = React.createElement;
-const Navbar = ReactBootstrap.Navbar;
 const Container = ReactBootstrap.Container;
-const  Nav = ReactBootstrap.Nav;
-const  NavDropdown = ReactBootstrap.NavDropdown;
-const  Button = ReactBootstrap.Button;
+const Button = ReactBootstrap.Button;
 const axios = axios;
-
-/*class MenuDropdown extends React.Component {
-    state = {
-        products: []
-    }
-
-    componentDidMount(){
-        axios.get('/ajax/category').then(res=>{
-            const products = res.data;
-            this.setState({ products });
-        })
-    }
-
-    render(){
-        return(
-            <NavDropdown title="Каталог" id="basic-nav-dropdown">
-                { this.state.products.map(product => <NavDropdown.Item href={product.link}>{product.name}</NavDropdown.Item>)}
-            </NavDropdown>                     
-        );
-    }
-}
-
-class MenuLink extends React.Component{
-    state = {
-        menu: []
-    }
-    componentDidMount(){
-        axios.get('/ajax/menu').then(res=>{
-            const menu = res.data;
-            this.setState({ menu });
-        })
-    }
-    render(){
-        return(
-            <Nav className="me-auto">
-                <MenuDropdown />
-                {this.state.menu.map(m => <Nav.Link href={m.link}>{m.name}</Nav.Link>)}
-            </Nav>
-        );
-    }
-}
-
-class Menu extends React.Component{
-    render(){
-        return(
-            <Navbar expand="lg" className="bg-body-tertiary">
-                <Container>
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <MenuLink />
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-        );
-    }
-}
-
-const root = ReactDOM.createRoot(document.getElementById('nav'));
-root.render(<Menu />);*/
-
 const Carousel = ReactBootstrap.Carousel;
 
 class Slides extends React.Component{
@@ -99,5 +37,43 @@ class Slides extends React.Component{
         );
     }
 }
-const main_slide = ReactDOM.createRoot(document.getElementById('slide'));
+const main_slide = ReactDOM.createRoot(document.getElementById("slide"));
 main_slide.render(<Slides />);
+
+const Tab = ReactBootstrap.Tab;
+const Tabs = ReactBootstrap.Tabs;
+
+class Show extends React.Component{
+    render(){
+        return(
+            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+                <Tab eventKey="home" title="Home">
+                    Tab content for Home
+                </Tab>
+                <Tab eventKey="profile" title="Profile">
+                    Tab content for Profile
+                </Tab>
+                <Tab eventKey="contact" title="Contact" disabled>
+                    Tab content for Contact
+                </Tab>
+            </Tabs>
+        );
+    }
+}
+
+const main_show_products = ReactDOM.createRoot(document.getElementById('main_products'));
+main_show_products.render(<Show />);
+
+class Quantity extends React.Component{
+    render(){
+        return(
+            <div className="cart-amount">
+                <Button><i className="mdi mdi-plus"></i></Button>
+                <p>1</p>
+                <Button><i className="mdi mdi-minus"></i></Button>
+            </div>
+        );
+    }
+}
+const amount = ReactDOM.createRoot(document.getElementById("amount"));
+amount.render(<Quantity />);
