@@ -1,2 +1,28 @@
-<p>{.text}</p>
-<p>{.price} rub</p>
+<div class="product-view-1">
+    <img src="{.image}" alt="">
+    <div class="view-block-btn">
+        <ul>
+            <li><p>{.money} <i class="mdi mdi-currency-rub"></i></p></li>
+            <li><a href="#description">Описание</a></li>
+            <li><a href="#characteristics">Характеристики</a></li>
+        </ul>
+    </div>
+</div>
+<hr>
+<div class="product-view-2">
+    <div class="amount" data-id="{.id}">
+        <button onclick="count_plus(this);"><i class="mdi mdi-plus"></i></button>
+        <input type="text" name="count_{.id}" value="1">
+        <button onclick="count_minus(this);"><i class="mdi mdi-minus"></i></button>
+    </div>
+    <button class="btn-cart-product" onclick="addcart(elem);">В корзину</button>
+</div>
+<hr>
+<div class="product-view-3">
+    <h2 id="description">Описание</h2>
+    <div class="block-view-text">{.text}</div>
+</div>
+<div class="product-view-4">
+    <h3 id="characteristics">Характеристики</h3>
+    <div class="block-view-charact">{.charact}</div>
+</div>

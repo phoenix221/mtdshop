@@ -16,5 +16,10 @@ class Product extends ActiveRecord
 	function link(){
 		return $this->get('url').'/';
 	}
+
+	function money(){
+		return number_format($this->get('price'), 0, '',' ');
+	}
+
 }
 

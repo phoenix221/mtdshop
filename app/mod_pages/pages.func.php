@@ -22,5 +22,9 @@ class PagesController
 	function catalog(){
 		d()->category_list = d()->Category->where('is_active = 1');
 	}
+
+	function index(){
+		d()->slides_list = d()->Slide->where('is_active = 1');
+	}
 }
 

@@ -1,18 +1,39 @@
 <ul>
     <foreach product_list>
-        <li class="product_cart">
-            <img src="{.image}" alt="">
+        <li class="product_cart" data-product_id="{.id}">
+            <div class="cart-img">
+                <picture>
+                    <source srcset="{.imge|preview '260','122'}" media="(max-width: 600px)">
+                    <img src="{.image}" alt="">
+                </picture>
+            </div>
             <div class="cart_block_text">
-                <a href="{.link}" class="cart-title">{.title}</a>
-                <p>{.text}</p>
+                <a href="{.link}" class="cart-title">{.title}</a>{{edit}}
+                <div class="cart-text-description">{.text}<button class="btn btn-link" id="desc_btn" onclick="readmore(this);">раскрыть</button></div>
                 <hr>
-                <p>{.charact}</p>
+                <div class="accordion" id="accordion_{.id}">
+                    <div class="accordion-item">
+                        <p class="accordion-header">
+                            <a class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne_{.id}" aria-expanded="true" aria-controls="collapseOne_{.id}">
+                                Характеристики
+                            </a>
+                        </p>
+                        <div id="collapseOne_{.id}" class="accordion-collapse collapse" data-bs-parent="#accordion_{.id}">
+                            <div class="accordion-body">
+                                {.charact}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="cart_block_price">
-                @d()->price = number_format(d()->this->price, 0, '',' ');
-                <p class="cart-price">{price} <span class="mdi mdi-currency-rub"></span></p>
-                <div id="amount"></div>
-                <div id="in_cart"></div>
+                <p class="cart-price">{.money} <span class="mdi mdi-currency-rub"></span></p>
+                <div class="amount" data-id="{.id}">
+                    <button onclick="count_plus(this);"><i class="mdi mdi-plus"></i></button>
+                    <input type="text" name="count_{.id}" value="1">
+                    <button onclick="count_minus(this);"><i class="mdi mdi-minus"></i></button>
+                </div>
+                <button class="btn-cart-product" onclick="addcart(elem);">В корзину</button>
             </div>
         </li>
     </foreach>

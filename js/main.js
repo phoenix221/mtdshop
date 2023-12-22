@@ -1,35 +1,65 @@
 // JavaScript Document
 $(document).ready(function () {
+	main_slider();
 
-	// Slick Slider
-	// <section class="slider">
-	// <img src="/images/slides/1.jpg" alt="">
-	// <img src="/images/slides/2.jpg" alt="">
-	// </section>
-	// $('.slider').slick({
-		// dots: false,
-		// infinite: true,
-		// speed: 900,
-		// fade: true,
-		// cssEase: 'linear',
-		// autoplay: true,
-		// autoplaySpeed: 2000,
-		// arrows: false,
-	// });
-
-    // Validate Jquery
-    // Сообщение об ошибке
-    // $.validator.messages.required = $('input[name=required_error]').val();
-    // инициализируем валидацию формы
-    // $('#profile-form').validate();
-    // Пример
-    // <label>
-        // <span><i class="icon icon-c"></i>{"company"|t}</span>
-        // <div class="inp"><input type="text" name="title" class="required" value="{user.title}" required /></div>
-    // </label>
-    
+	if($('.cart-text-description').length){
+		block_cart_desription();
+	}
 });
 
 function captcha_clean(){
     $("#data_captcha").val("").focus();
+}
+
+function main_slider(){
+	if(!$('#carousel').length)return;
+	const myCarousel = document.querySelector('#carousel');
+
+	const carousel = new bootstrap.Carousel(myCarousel, {
+  		interval: 2000,
+  		touch: false
+	});
+}
+
+function count_plus(elem){
+	let wrap = $(elem).parent('.amount');
+	let id = wrap.data('id');
+	let count = wrap.find("input").val();
+	let sum = parseInt(count)+1;
+	$('input[name=count_'+id+']').val(sum);
+}
+
+function count_minus(elem){
+	let wrap = $(elem).parent('.amount');
+	let id = wrap.data('id');
+	let count = wrap.find("input").val();
+	let sum = 1;
+	if(count > 1){
+		sum = parseInt(count)-1;
+	}
+	$('input[name=count_'+id+']').val(sum);
+}
+
+function readmore(elem){
+	let wrap = $(elem).parent('.cart-text-description');
+	if($(wrap).find("p").hasClass('hide')){
+		$(wrap).find("p").removeClass('hide');
+		$(elem).addClass('pos').html('скрыть');
+	}else{
+		$(wrap).find("p").addClass('hide');
+		$(elem).removeClass('pos').html('раскрыть');
+	}	
+}
+
+function block_cart_desription(){
+	let block = $('.cart-text-description');
+	block.each(function(index, value){
+		let height = $(value).find('p').height();
+		let parent = $(value).parent('div.cart_block_text');
+		if(height > 85){
+			$(value).find('p').addClass('hide');
+			$(value).find('#desc_btn').addClass('show');
+		}
+	});
+	
 }
