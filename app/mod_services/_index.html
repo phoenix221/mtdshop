@@ -2,7 +2,14 @@
     <h1>Услуги</h1>
     <ul>
         <foreach services_list>
-            <li><a href="{.link}">{.title}</a></li>
+            <li class="services-items">
+                <img src="{.image}" alt="">
+                <div class="servises-text">
+                    <a href="{.link}" class="services-ttl">{.title}</a>
+                    {.text}
+                    <a href="{.link}" class="services-btn">Подробнее</a>
+                </div>
+            </li>
         </foreach>
     </ul>
 </div>
