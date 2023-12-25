@@ -20,8 +20,30 @@
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
-          </div>
-        <div id="main_products"></div>
+        </div>
+        <div id="main_product" class="main_block_products">
+          <ul id="btn_block">
+            @d()->active = 'active';
+            <foreach stikers_list>
+              <li class="btn-main-products {active}" value="{.id}">{.title}</li>
+              @d()->active = '';
+            </foreach>
+          </ul>
+          <div id="main_products_show"></div>
+        </div>
+        <div class="popular_category">
+          <h1>Популярные категории</h1>
+          <ul class="popular_block">
+            <foreach category_popular>
+              <li class="popular_items">
+                  <div class="popular-items-img">
+                    <img src="{.image}" alt="">
+                  </div>
+                  <a href="{.link}" class="popular-items-title">{.title}</a>
+              </li>
+            </foreach>
+          </ul>
+        </div>
     </div>
 </div>
 

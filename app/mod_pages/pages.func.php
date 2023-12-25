@@ -25,6 +25,8 @@ class PagesController
 
 	function index(){
 		d()->slides_list = d()->Slide->where('is_active = 1');
+		d()->stikers_list = d()->Stiker->where('is_active = 1');
+		d()->category_popular = d()->Category->where('is_active = 1 and is_main = 1');
 	}
 }
 

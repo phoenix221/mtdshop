@@ -1,8 +1,15 @@
 <div class="container">
     <h1>Акции</h1>
-    <ul>
+    <ul class="sales-block">
         <foreach sales_list>
-            <li><a href="{.link}">{.title}</a></li>
+            <li class="sales-items">
+                <div class="sales-img">
+                    <img src="{.image}" alt="">
+                </div>
+                <a href="{.link}" class="sales-ttl">{.title}{{edit}}</a>
+                {.text}
+                <a href="{.link}" class="btn-sales">Подробнее</a>
+            </li>
         </foreach>
     </ul>
 </div>

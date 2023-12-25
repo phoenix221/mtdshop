@@ -96,32 +96,6 @@ function getex($filename) {
 }
 // загрузка картинок для CK Editor
 
-function ajax_menu(){
-    $page_list = d()->Page->where('is_menu = 1');
-    $result = Array();
-    $i =0;
-    foreach ($page_list as $key=>$value){
-        $result[$i]['link'] = $value->link;
-        $result[$i]['name'] = $value->name_link;
-        $i++;
-    }
-
-    return json_encode($result);
-}
-
-function ajax_category(){
-    $category_list = d()->Category->where('is_active = 1');
-    $result = Array();
-    $i =0;
-    foreach ($category_list as $key=>$value){
-        $result[$i]['link'] = $value->link;
-        $result[$i]['name'] = $value->title;
-        $i++;
-    }
-
-    return json_encode($result);
-}
-
 function ajax_check_url_genereator(){
     if($_POST['url'] && $_POST['table'] && $_POST['id']){
         $url = $_POST['url'];
@@ -143,16 +117,11 @@ function ajax_check_url_genereator(){
     d()->page_not_found();
 }
 
-function ajax_slides(){
-    $slides_list = d()->Slide->where('is_active = 1');
-    $res = Array();
-    $i = 0;
-    foreach ($slides_list as $k_sl=>$v_sl){
-        $res[$i]['image'] = $v_sl->image;
-        $res[$i]['title'] = $v_sl->title;
-        $res[$i]['link'] = $v_sl->link;
-        $i++;
-    }
+function ajax_main_products(){
+    if($_POST['id']){
+        d()->products_list = d()->Product->where('is_active = 1 and stikers LIKE ?', '%|'.$_POST['id'].'|%');
 
-    return json_encode($res);
+        print d()->main_products_show_tpl();
+        exit;
+    }
 }

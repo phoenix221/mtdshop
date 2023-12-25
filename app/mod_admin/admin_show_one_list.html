@@ -6,6 +6,11 @@
 
 <h1>{curr_title}</h1>
 {curr_content}
+<? if(url(3) == 'products' && url(4)): ?>
+	<div style="margin: 15px 0;" class="mfrm">
+		<a href="/admin/list/stikers/" class="btn btn-default">Стикеры</a>
+	</div>
+<? endif; ?>	
 <table class="table table-striped table-bordered table-condensed"  width=100%>
 <thead>
 	<tr>

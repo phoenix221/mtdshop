@@ -1,0 +1,19 @@
+<ul class="show_products_block">
+    <foreach products_list>
+        <li class="show_products_items">
+            <div class="items-img">
+                <img src="{.image}" alt="">
+            </div>
+            <a href="{.link}" class="items-title">{.title}</a>
+            <p class="items-price">{.money} <span class="mdi mdi-currency-rub"></span></p>
+            <div class="block-addcart">
+                <div class="amount" data-id="{.id}">
+                    <button onclick="count_plus(this);"><i class="mdi mdi-plus"></i></button>
+                    <input type="text" name="count_{.id}" value="1">
+                    <button onclick="count_minus(this);"><i class="mdi mdi-minus"></i></button>
+                </div>
+                <button class="btn-cart-product" onclick="addcart(elem);">В корзину</button>
+            </div>
+        </li>
+    </foreach>
+</ul>

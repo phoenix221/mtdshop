@@ -19,10 +19,8 @@ route('/get/server', 'main', 'get_server');
 route('/get/session', 'main', 'get_session');
 route('/ajax/ckupload', 'main', 'ajax_ckupload');
 
-route('/ajax/menu', 'main', 'ajax_menu');
-route('/ajax/category', 'main', 'ajax_category');
-route('/ajax/slides', 'main', 'ajax_slides');
 route('/ajax/check_url_genereator', 'main', 'ajax_check_url_genereator');
+route('/ajax/main_products', 'main', 'ajax_main_products');
 
 
 //route('/news/index', 'content', 'news#index');
