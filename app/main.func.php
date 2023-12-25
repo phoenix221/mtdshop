@@ -51,9 +51,19 @@ function get_server(){
 
 function get_session(){
     if($_SESSION['admin']) {
+        if($_GET['action'] == 'clear'){
+            foreach($_SESSION as $k=>$v){
+                if($k=='admin' || $k=='auth') continue;
+                unset($_SESSION[$k]);
+            }
+            header('Location: /get/session');
+            exit;
+        }
         print '<pre>';
         print_r($_SESSION);
         print '</pre>';
+
+        print '<a href="?action=clear">Очистить сессию</a>';
         exit;
     }
     d()->page_not_found();
@@ -123,5 +133,25 @@ function ajax_main_products(){
 
         print d()->main_products_show_tpl();
         exit;
+    }
+}
+
+function ajax_addcart(){
+    if($_POST['id'] && $_POST['count'] && $_POST['type']){
+        if($_POST['type'] == 'add'){
+            $product = d()->Product($_POST['id']);
+            if(!$product->is_empty){
+                $total_price = $product->price*$_POST['count'];
+
+                $_SESSION['cart']['id'] = array(
+                    'id' => $product->id,
+                    'title' => $product->title,
+                    'price' => $product->price,
+                    'count' => $_POST['count'],
+                    'total_price' => $total_price,
+                    'image' => $product->image
+                );
+            }
+        }
     }
 }

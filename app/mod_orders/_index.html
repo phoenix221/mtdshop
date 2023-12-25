@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="product-wrap">
+        <h1>Моя корзина</h1>
+        @if(d()->cart_list):
+        <ul class="cart_block">
+            <foreach cart_list>
+                <li class="cart_items">
+                    <div class="cart-img">
+                        <img src="{.image}" alt="">
+                    </div>
+                    <div class="cart-text">
+                        <p class="cart-ttl">{.title}</p>
+                        <div class="cart-block-price">
+                            <p class="cart_money">{.money} <i class="mdi mdi-currency-rub"></i></p>
+                            <div class="amount" data-id="{.id}">
+                                <button onclick="count_plus(this);"><i class="mdi mdi-plus"></i></button>
+                                <input type="text" name="count_{.id}" value="{.count}">
+                                <button onclick="count_minus(this);"><i class="mdi mdi-minus"></i></button>
+                            </div>
+                            <p class="cart_money">{.total_money} <i class="mdi mdi-currency-rub"></i></p>
+                        </div>
+                    </div>
+                    <button onclick="delete_cart(this)" class="btn-cart-delete"><i class="mdi mdi-delete"></i></button>
+                </li>
+            </foreach>
+        </ul>
+        @else:
+        <p>Корзина пуста</p>
+        @endif;
+    </div>
+</div>

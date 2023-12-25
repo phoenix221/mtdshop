@@ -1,6 +1,6 @@
 <ul class="show_products_block">
     <foreach products_list>
-        <li class="show_products_items">
+        <li class="show_products_items" data-id="{.id}">
             <div class="items-img">
                 <img src="{.image}" alt="">
             </div>
@@ -12,7 +12,7 @@
                     <input type="text" name="count_{.id}" value="1">
                     <button onclick="count_minus(this);"><i class="mdi mdi-minus"></i></button>
                 </div>
-                <button class="btn-cart-product" onclick="addcart(elem);">В корзину</button>
+                <button class="btn-cart-product" onclick="addcart(this, 'add');">В корзину</button>
             </div>
         </li>
     </foreach>

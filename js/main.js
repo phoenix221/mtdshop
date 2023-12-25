@@ -78,8 +78,17 @@ function block_cart_desription(){
 
 function main_products_show(id){
 	$.post('/ajax/main_products', {id: id}, function(data){
-		console.log(data);
 		$('#main_products_show').html(data);
 	});
+}
 
+function addcart(elem, type){
+	let block = $(elem).closest('li');
+	let id = $(block).attr('data-id');
+	let count = $(block).find('input[name=count_'+id+']').val();
+	console.log('id='+id+'count='+count);
+
+	$.post('/ajax/addcart', {id: id, count: count, type: type}, function(data){
+		console.log(data);
+	});
 }

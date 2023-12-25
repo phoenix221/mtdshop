@@ -15,12 +15,17 @@ route('/sales/', 'sales#show');
 route('/uslugi/index', 'services#index');
 route('/uslugi/', 'services#show');
 
+route('/order/index', 'orders#index');
+route('/order/placing_an_order', 'orders#placing');
+route('/order/finish', 'orders#finish');
+
 route('/get/server', 'main', 'get_server');
 route('/get/session', 'main', 'get_session');
 route('/ajax/ckupload', 'main', 'ajax_ckupload');
 
 route('/ajax/check_url_genereator', 'main', 'ajax_check_url_genereator');
 route('/ajax/main_products', 'main', 'ajax_main_products');
+route('/ajax/addcart', 'main', 'ajax_addcart');
 
 
 //route('/news/index', 'content', 'news#index');
