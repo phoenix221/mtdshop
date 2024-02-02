@@ -21,5 +21,9 @@ class Product extends ActiveRecord
 		return number_format($this->get('price'), 0, '',' ');
 	}
 
+	function main_link(){
+		$category = d()->Category->where('id = ?', trim($this->get('catalog_id'),'|'));
+		return 'catalog/'.$category->url.'/'.$this->get('url').'/';
+	}
 }
 

@@ -26,6 +26,7 @@ route('/ajax/ckupload', 'main', 'ajax_ckupload');
 route('/ajax/check_url_genereator', 'main', 'ajax_check_url_genereator');
 route('/ajax/main_products', 'main', 'ajax_main_products');
 route('/ajax/addcart', 'main', 'ajax_addcart');
+route('/ajax/create_order', 'main', 'ajax_create_order');
 
 
 //route('/news/index', 'content', 'news#index');

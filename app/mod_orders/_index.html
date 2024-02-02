@@ -1,31 +1,52 @@
-<div class="container">
-    <div class="product-wrap">
-        <h1>Моя корзина</h1>
-        @if(d()->cart_list):
-        <ul class="cart_block">
-            <foreach cart_list>
-                <li class="cart_items">
-                    <div class="cart-img">
-                        <img src="{.image}" alt="">
+<div class="product-wrap">
+    <h1>Моя корзина</h1>
+    @if(d()->cart_list):
+    <ul class="cart_block">
+        <foreach cart_list>
+            <li class="cart_items">
+                <div class="cart-img">
+                    <img src="{.image}" alt="">
+                </div>
+                <div class="cart-text">
+                    <p class="cart-ttl">{.title}</p>
+                </div>
+                <div class="cart-block-price">
+                    <div class="cart_money_first cart-stranch">
+                        <small>Цена за 1 ед.:</small>
+                        <span>{.money} <i class="mdi mdi-currency-rub"></i></span>
                     </div>
-                    <div class="cart-text">
-                        <p class="cart-ttl">{.title}</p>
-                        <div class="cart-block-price">
-                            <p class="cart_money">{.money} <i class="mdi mdi-currency-rub"></i></p>
-                            <div class="amount" data-id="{.id}">
-                                <button onclick="count_plus(this);"><i class="mdi mdi-plus"></i></button>
-                                <input type="text" name="count_{.id}" value="{.count}">
-                                <button onclick="count_minus(this);"><i class="mdi mdi-minus"></i></button>
-                            </div>
-                            <p class="cart_money">{.total_money} <i class="mdi mdi-currency-rub"></i></p>
+                    <div class="cart_prd_count cart-stranch">
+                        <small>Количество:</small>
+                        <div class="amount" data-id="{.id}">
+                            <button onclick="count_plus(this);"><i class="mdi mdi-plus"></i></button>
+                            <input type="text" name="count_{.id}" value="{.cnt}"> 
+                            <button onclick="count_minus(this);"><i class="mdi mdi-minus"></i></button>
                         </div>
                     </div>
-                    <button onclick="delete_cart(this)" class="btn-cart-delete"><i class="mdi mdi-delete"></i></button>
-                </li>
-            </foreach>
-        </ul>
-        @else:
-        <p>Корзина пуста</p>
-        @endif;
+                    <div class="cart_money cart-stranch">
+                        <small>Итого:</small>
+                        <span>{.total_money} <i class="mdi mdi-currency-rub"></i></span>
+                    </div>
+                </div>
+                <button onclick="delete_cart(this)" class="btn-cart-delete"><i class="mdi mdi-delete"></i></button>
+            </li>
+        </foreach>
+    </ul>
+    <div class="block_discount">
+        <div class="block_points">
+            <span class="points_ttl">Использовать баллы</span>
+            <input type="text" name="points" value="">
+            <button>Применить</button>
+        </div>
+        <div class="total_price_cart">
+            <span class="finish_price_ttl">Итого:</span>
+            <p>{finish_price} <i class="mdi mdi-currency-rub"></i></p>
+        </div>
     </div>
+    <div class="block-btn-order">
+        <a href="/order/placing_an_order" class="btn_order">Оформить заказ</a>
+    </div>
+    @else:
+    <p>Корзина пуста</p>
+    @endif;
 </div>

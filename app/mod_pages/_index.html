@@ -1,49 +1,49 @@
 <div class="row-content">
-    <div class="container">
-        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <foreach slides_list>
-                    <div class="carousel-item active">
-                        <img src="{.image}" class="carusel-main" alt="">
-                        <div class="carousel-caption">
-                            <p class="slide-tlt">{.title}</p>
-                            <a href={.link} class="slide-btn">Подробнее</a>
-                        </div>
-                      </div>
-                </foreach>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+  <div id="carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+    @d()->active = 'active';
+      <foreach slides_list>
+        <div class="carousel-item {active}">
+          <img src="{.image}" class="carusel-main" alt="">
+          <div class="carousel-caption">
+            <p class="slide-tlt">{.title}</p>
+            <a href={.link} class="slide-btn">Подробнее</a>
+          </div>
         </div>
-        <div id="main_product" class="main_block_products">
-          <ul id="btn_block">
-            @d()->active = 'active';
-            <foreach stikers_list>
-              <li class="btn-main-products {active}" value="{.id}">{.title}</li>
-              @d()->active = '';
-            </foreach>
-          </ul>
-          <div id="main_products_show"></div>
-        </div>
-        <div class="popular_category">
-          <h1>Популярные категории</h1>
-          <ul class="popular_block">
-            <foreach category_popular>
-              <li class="popular_items">
-                  <div class="popular-items-img">
-                    <img src="{.image}" alt="">
-                  </div>
-                  <a href="{.link}" class="popular-items-title">{.title}</a>
-              </li>
-            </foreach>
-          </ul>
-        </div>
+        @d()->active = '';
+      </foreach>
     </div>
+    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <div id="main_product" class="main_block_products">
+    <ul id="btn_block">
+      @d()->active = 'active';
+      <foreach stikers_list>
+        <li class="btn-main-products {active}" value="{.id}">{.title}</li>
+        @d()->active = '';
+      </foreach>
+    </ul>
+    <div id="main_products_show"></div>
+  </div>
+  <div class="popular_category">
+    <h1>Популярные категории</h1>
+    <ul class="popular_block">
+      <foreach category_popular>
+        <li class="popular_items">
+          <div class="popular-items-img">
+            <img src="{.image}" alt="">
+          </div>
+          <a href="{.link}" class="popular-items-title">{.title}</a>
+        </li>
+      </foreach>
+    </ul>
+  </div>
 </div>
 

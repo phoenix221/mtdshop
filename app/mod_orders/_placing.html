@@ -1,0 +1,88 @@
+<div class="cart-wrap">
+    <h1>Оформление заказа</h1>
+    <form id="order_form" method="post">
+        <div class="customer_block">
+            <p>Тип плательщика</p>
+            <div class="checkbox_block">
+                <div class="customer_items checkbox_items">
+                    <input id="type_1" type="radio" name="customer_type" value="1" class="checbox_customer" checked>
+                    <label for="type_1">Физическое лицо</label>
+                </div>
+                <div class="customer_items checkbox_items">
+                    <input id="type_2" type="radio" name="customer_type" value="2" class="checbox_customer">
+                    <label for="type_2">Юридическое лицо</label>
+                </div>
+            </div>
+        </div>
+        <div class="customer_block">
+            <p>Доставка</p>
+            <div class="customer_items">
+                <label for="address">Адресс доставки</label>
+                <input type="text" name="address" id="address" placeholder="Россия, Республика Татарстан, Казань, ул. Татарстан, д. 1" value="">
+            </div>
+            <div class="customer_items">
+                <label for="address_index">Индекс</label>
+                <input type="text" onkeypress="return event.charCode >=48 && event.charCode<=57" name="address_index" id="address_index" value="" placeholder="422222" maxlength="6">
+            </div>
+        </div>
+        <div class="customer_block">
+            <p>Способ оплаты</p>
+            <div class="customer_items checkbox_items">
+                <input type="checkbox" name="payment_account" id="payment_account" value="1" class="checbox_customer" checked>
+                <label for="payment_account">Оплата по счету</label>
+            </div>
+        </div>
+        <div class="customer_block">
+            <p>Способ доставки</p>
+            <div class="customer_items checkbox_items">
+                <input type="checkbox" name="delivery" id="delivery" value="1" class="checbox_customer" checked>
+                <label for="delivery">Доставка траспортной компании</label>
+            </div>
+        </div>
+        <div class="customer_block">
+            <p>Данные покупателя</p>
+            <div class="customer_items">
+                <label for="fio">ФИО/Название компании</label>
+                <input type="text" name="fio" id="fio" value="">
+            </div>
+            <div class="customer_items">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="">
+            </div>
+            <div class="customer_items">
+                <label for="phone">Номер телефона</label>
+                <input type="text" name="phone" id="phone" maxlength="13" value="" required>
+            </div>
+            <div class="customer_items">
+                <label for="comment">Комментарии</label>
+                <input type="text" name="comment" id="comment" value="">
+            </div>
+        </div>
+        <div class="customer_block">
+            <ul class="cb_total">
+                <li class="cb_total_items">
+                    <p><span>Стоимость заказа:</span> {finish_price} <i class="mdi mdi-currency-rub"></i></p>
+                </li>
+                <!--<li class="cb_total_items">
+                    <p><span>Доставка:</span> {delivery_price} <i class="mdi mdi-currency-rub"></i></p>
+                </li>-->
+                <li class="cb_total_items">
+                    <p><span>Оплата баллами:</span> {points_price} <i class="mdi mdi-currency-rub"></i></p>
+                </li>
+                <li class="cb_total_items">
+                    <p><span>Итого:</span> {total_order_price} <i class="mdi mdi-currency-rub"></i></p>
+                </li>
+            </ul>
+        </div>
+        <div class="customer_block politic_block">
+            <div class="customer_items politic_items">
+                <input type="checkbox" name="politic_data" value="1" checked class="checbox_customer">
+                <label for="politic_data">Соглашение на обработку персональных данных</label>
+            </div>
+            <div class="customer_items items_order_btn">
+                <button class="btn-cancel">Отмена</button>
+                <input type="button" class="btn_order"  id="create_order" value="Оформить заказ">
+            </div>
+        </div>
+    </form>
+</div>

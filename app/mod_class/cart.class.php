@@ -12,8 +12,8 @@ class Cart extends Model
 		return number_format($this->get('total_price'), 0, '',' ');
 	}
 
-    function test(){
-        return 'TEST';
+    function cnt(){
+        return $this->get('count');
     }
 }
 

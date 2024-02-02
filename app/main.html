@@ -3,8 +3,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
-<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"/>-->
 <link rel="stylesheet" href="/images/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css" href="/images/finish.css" />
@@ -44,7 +42,10 @@
                         <button><i class="mdi mdi-magnify"></i></button>
                     </form>
                 </div>
-                <a href="/order/" class="btn-cart"><i class="mdi mdi-cart-outline"></i></a>
+                <a href="/order/" class="btn-cart">
+                    <i class="mdi mdi-cart-outline"></i>
+                    <p id="cart_count" class="cart_count {hide}">{cart_count}</p>
+                </a>
             </div>
         </div>
     </div>
@@ -67,18 +68,12 @@
             </div>
         </div>
     </nav>
-    <div class="block-requerst">
-        <div class="block-orders">
-            <a href="/order/" class="btn-cart-mb"><i class="mdi mdi-cart-outline"></i></a>
-            <span class="tooltiptext-orders">Перейти в корзину</span>
-        </div>
-        <div class="block-feedback">
-            <button class="btn-feedback"><i class="mdi mdi-phone-alert"></i></button>
-            <span class="tooltiptext">Заказать звонок</span>
-        </div>
+</header>
+<section>
+    <div class="container">
+        {{{content}}}
     </div>
-</header> 
-{{{content}}}
+</section>
 <footer>
     <div class="container">
         <div class="footer-blok">
@@ -86,7 +81,7 @@
                 <p class="f-title">Компания</p>
                 <ul>
                     <li><a href="">О компании</a></li>
-                    <li><a href="">Реквезиты</a></li>
+                    <li><a href="">Реквизиты</a></li>
                     <li><a href="">Контакты</a></li>
                     <li><a href="">Пользовательское соглашение</a></li>
                     <li><a href="">Политика обработки персональных данных</a></li>
@@ -134,14 +129,21 @@
         </div>
     </div>
 </footer>
-
-<!--<script src="/js/react.production.min.js" crossorigin></script>
-<script src="/js/react-dom.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js" crossorigin></script>
-<script src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin></script>
-<script type="text/babel" src="/js/App.js" crossorigin></script>-->
-<script type="text/javascript" src="/js/jquery.min.js"></script>
+<div class="block-requerst">
+    <div class="block-orders">
+        <a href="/order/" class="btn-cart-mb">
+            <i class="mdi mdi-cart-outline"></i>
+            <p id="cart_count_mb" class="cart_count_mb {hide}">{cart_count}</p>
+        </a>
+        <span class="tooltiptext-orders">Перейти в корзину</span>
+    </div>
+    <div class="block-feedback">
+        <button class="btn-feedback"><i class="mdi mdi-phone-alert"></i></button>
+        <span class="tooltiptext">Заказать звонок</span>
+    </div>
+</div>
+<!--<script type="text/javascript" src="/js/jquery.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
 </body>

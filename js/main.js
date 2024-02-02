@@ -18,6 +18,11 @@ $(document).ready(function () {
 		$(this).addClass('active');
 		main_products_show(id);
 	});
+
+	$('#create_order').on('click', function(){
+		create_order_func('order_form');
+		return false;
+	});
 });
 
 function captcha_clean(){
@@ -87,8 +92,28 @@ function addcart(elem, type){
 	let id = $(block).attr('data-id');
 	let count = $(block).find('input[name=count_'+id+']').val();
 	console.log('id='+id+'count='+count);
+	let cart_count = $('#cart_count').html();
+	console.log(cart_count);
 
 	$.post('/ajax/addcart', {id: id, count: count, type: type}, function(data){
 		console.log(data);
+		let c = parseInt(cart_count)+parseInt(count);
+		$('#cart_count').removeClass('hide').html(c);
+		$('#cart_count_mb').removeClass('hide').html(c);
+	});
+}
+
+function create_order_func(order_form){
+	let data = $('#'+order_form).serialize();
+	console.log(data);
+	$.post('/ajax/create_order', {data: data}, function(rersult){
+		console.log(rersult);
+		let rest = JSON.parse(rersult);
+		if(rest['success'] == 'success'){
+			window.location.href = '/order/finish?order='+rest['order'];
+		}
+		if(rest['error'] == 'error'){
+			$('#error_alert').html(rest['message']).show();
+		}
 	});
 }

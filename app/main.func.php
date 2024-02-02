@@ -12,7 +12,15 @@ function main()
     d()->o = d()->Option;
     d()->page_list = d()->Page->where('is_menu = 1');
     d()->category_list = d()->Category->where('is_active = 1');
-
+    if($_SESSION['cart']){
+        $cart = $_SESSION['cart'];
+        d()->cart_count = count($cart);
+        d()->hide = '';
+    }else{
+        d()->cart_count = 0;
+        d()->hide = 'hide';
+    }
+    
 	d()->content = d()->content();
 	print d()->render('main_tpl');
 }
@@ -143,7 +151,7 @@ function ajax_addcart(){
             if(!$product->is_empty){
                 $total_price = $product->price*$_POST['count'];
 
-                $_SESSION['cart']['id'] = array(
+                $_SESSION['cart'][$product->id] = array(
                     'id' => $product->id,
                     'title' => $product->title,
                     'price' => $product->price,
@@ -153,5 +161,35 @@ function ajax_addcart(){
                 );
             }
         }
+    }
+}
+
+function ajax_create_order(){
+    if($_POST['data']){
+        $data = explode('&', $_POST['data']);
+        $_SESSION['dbg'] = $data;
+        $co = Array();
+        $result = Array();
+        foreach ($data as $v){
+            $d = explode('=', $v);
+            $co[$d[0]] = $d[1];
+        }
+
+        $o = d()->Order->new;
+        $o->customer_type = $co['customer_type'];
+        $o->address = $co['address'];
+        $o->address_index = $co['address_index'];
+        $o->payment_account = $co['payment_account'];
+        $o->delivery = $co['delivery'];
+        $o->name = $co['fio'];
+        $o->email = $co['email'];
+        $o->phone = $co['phone'];
+        $o->comment = $co['comment'];
+        $o->cart = json_encode($_SESSION['cart']);
+        $order = $o->save_and_load();
+
+        $result['success'] = 'success';
+        $result['order'] = $order->id;
+        return json_encode($result);
     }
 }
