@@ -3,7 +3,7 @@
     @if(d()->cart_list):
     <ul class="cart_block">
         <foreach cart_list>
-            <li class="cart_items">
+            <li class="cart_items" data-id="{.id}">
                 <div class="cart-img">
                     <img src="{.image}" alt="">
                 </div>
@@ -13,19 +13,19 @@
                 <div class="cart-block-price">
                     <div class="cart_money_first cart-stranch">
                         <small>Цена за 1 ед.:</small>
-                        <span>{.money} <i class="mdi mdi-currency-rub"></i></span>
+                        <span data-price="{.price}" id="price_{.id}">{.money} <i class="mdi mdi-currency-rub"></i></span>
                     </div>
                     <div class="cart_prd_count cart-stranch">
                         <small>Количество:</small>
-                        <div class="amount" data-id="{.id}">
-                            <button onclick="count_plus(this);"><i class="mdi mdi-plus"></i></button>
+                        <div class="amount amount_cart">
+                            <button onclick="count_plus_cart(this);"><i class="mdi mdi-plus"></i></button>
                             <input type="text" name="count_{.id}" value="{.cnt}"> 
-                            <button onclick="count_minus(this);"><i class="mdi mdi-minus"></i></button>
+                            <button onclick="count_minus_cart(this);"><i class="mdi mdi-minus"></i></button>
                         </div>
                     </div>
                     <div class="cart_money cart-stranch">
                         <small>Итого:</small>
-                        <span>{.total_money} <i class="mdi mdi-currency-rub"></i></span>
+                        <span id="total_price_{.id}" data-price="{.total_price}">{.total_money} <i class="mdi mdi-currency-rub"></i></span>
                     </div>
                 </div>
                 <button onclick="delete_cart(this)" class="btn-cart-delete"><i class="mdi mdi-delete"></i></button>
@@ -40,7 +40,7 @@
         </div>
         <div class="total_price_cart">
             <span class="finish_price_ttl">Итого:</span>
-            <p>{finish_price} <i class="mdi mdi-currency-rub"></i></p>
+            <p id="finish_price" data-price="{finish_price}">{finish_money} <i class="mdi mdi-currency-rub"></i></p>
         </div>
     </div>
     <div class="block-btn-order">

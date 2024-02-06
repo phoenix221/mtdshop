@@ -1,0 +1,32 @@
+<style>
+    .block_email ul li{
+        list-style: none;
+    }
+</style>
+<div class="block_email">
+    <ul>
+        <li>ФИО/Название компании: <strong>{order.name}</strong></li>
+        @if(d()->order->customer_type == 1):
+        <li><strong>Физическое лицо</strong></li>
+        @else:
+        <li><strong>Юридическое лицо</strong></li>
+        @endif;
+        <li>Адрес: <strong>{order.address}</strong></li>
+        <li>Индекс: <strong>{order.address_index}</strong></li>
+        <li>Телефон: <strong></strong>{order.phone}</strong></li>
+        <li>email: <strong>{order.email}</strong></li>
+        <li>Итоговая цена: <strong>{order.finish_price} руб.</strong></li>
+    </ul>
+    <div class="cart">
+    @d()->cart = json_decode(d()->order->cart);
+    <ul>
+        <p>Корзина:</p>
+        <foreach cart as c>
+            <li>Наименование: <strong>{c.title}</strong></li>
+            <li>Цена за 1 ед.: <strong>{c.price} руб.</strong></li>
+            <li>Количество: <strong>{c.count}</strong></li>
+            <li>Цена: <strong>{c.total_price} руб.</strong></li>
+        </foreach>
+    </ul>
+    </div>
+</div>

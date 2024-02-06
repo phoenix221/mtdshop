@@ -1,5 +1,6 @@
 <div class="cart-wrap">
     <h1>Оформление заказа</h1>
+    <div id="error_alert"></div>
     <form id="order_form" method="post">
         <div class="customer_block">
             <p>Тип плательщика</p>
@@ -17,11 +18,11 @@
         <div class="customer_block">
             <p>Доставка</p>
             <div class="customer_items">
-                <label for="address">Адресс доставки</label>
-                <input type="text" name="address" id="address" placeholder="Россия, Республика Татарстан, Казань, ул. Татарстан, д. 1" value="">
+                <label for="address">Адресс доставки<span class="red">*</span></label>
+                <input type="text" name="address" id="address" placeholder="Россия, Республика Татарстан, Казань, ул. Татарстан, д. 1" value="" required>
             </div>
             <div class="customer_items">
-                <label for="address_index">Индекс</label>
+                <label for="address_index">Индекс<span class="red">*</span></label>
                 <input type="text" onkeypress="return event.charCode >=48 && event.charCode<=57" name="address_index" id="address_index" value="" placeholder="422222" maxlength="6">
             </div>
         </div>
@@ -42,15 +43,15 @@
         <div class="customer_block">
             <p>Данные покупателя</p>
             <div class="customer_items">
-                <label for="fio">ФИО/Название компании</label>
-                <input type="text" name="fio" id="fio" value="">
+                <label for="fio">ФИО/Название компании<span class="red">*</span></label>
+                <input type="text" name="fio" id="fio" value="" required>
             </div>
             <div class="customer_items">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" value="">
+                <label for="email">Email<span class="red">*</span></label>
+                <input type="email" name="email" id="email" value="" required>
             </div>
             <div class="customer_items">
-                <label for="phone">Номер телефона</label>
+                <label for="phone">Номер телефона<span class="red">*</span></label>
                 <input type="text" name="phone" id="phone" maxlength="13" value="" required>
             </div>
             <div class="customer_items">
@@ -61,27 +62,29 @@
         <div class="customer_block">
             <ul class="cb_total">
                 <li class="cb_total_items">
-                    <p><span>Стоимость заказа:</span> {finish_price} <i class="mdi mdi-currency-rub"></i></p>
+                    <p><span>Стоимость заказа:</span> {finish_money} <i class="mdi mdi-currency-rub"></i></p>
                 </li>
                 <!--<li class="cb_total_items">
                     <p><span>Доставка:</span> {delivery_price} <i class="mdi mdi-currency-rub"></i></p>
                 </li>-->
-                <li class="cb_total_items">
+                <!--<li class="cb_total_items">
                     <p><span>Оплата баллами:</span> {points_price} <i class="mdi mdi-currency-rub"></i></p>
-                </li>
+                </li>-->
                 <li class="cb_total_items">
-                    <p><span>Итого:</span> {total_order_price} <i class="mdi mdi-currency-rub"></i></p>
+                    <p id="order_finish_price" data-price="{total_order_price}"><span>Итого:</span> {total_order_money} <i class="mdi mdi-currency-rub"></i></p>
                 </li>
             </ul>
         </div>
         <div class="customer_block politic_block">
             <div class="customer_items politic_items">
-                <input type="checkbox" name="politic_data" value="1" checked class="checbox_customer">
+                <input type="checkbox" name="politic_data" value="1" checked class="checbox_customer" required>
                 <label for="politic_data">Соглашение на обработку персональных данных</label>
+                <p><span class="red">*</span> - обязательные поля</p>
             </div>
             <div class="customer_items items_order_btn">
-                <button class="btn-cancel">Отмена</button>
-                <input type="button" class="btn_order"  id="create_order" value="Оформить заказ">
+                <a href="/order/" class="btn-cancel">Отмена</a>
+                <input type="button" class="btn_order btn_placinig"  id="create_order" value="Оформить заказ">
+                <div class="loading"><img src="/images/loading.gif" alt=""></div>
             </div>
         </div>
     </form>

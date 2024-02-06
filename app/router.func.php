@@ -22,11 +22,13 @@ route('/order/finish', 'orders#finish');
 route('/get/server', 'main', 'get_server');
 route('/get/session', 'main', 'get_session');
 route('/ajax/ckupload', 'main', 'ajax_ckupload');
+route('/admin/orders_lists/', 'main', 'show_orders_list');
 
 route('/ajax/check_url_genereator', 'main', 'ajax_check_url_genereator');
 route('/ajax/main_products', 'main', 'ajax_main_products');
 route('/ajax/addcart', 'main', 'ajax_addcart');
 route('/ajax/create_order', 'main', 'ajax_create_order');
+route('/ajax/delete_cart', 'main', 'ajax_delete_cart');
 
 
 //route('/news/index', 'content', 'news#index');

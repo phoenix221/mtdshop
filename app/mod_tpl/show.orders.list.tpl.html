@@ -1,0 +1,49 @@
+<style>
+    .show_orders{
+        border: 1px solid #e1e0e0;
+    }
+    .show_orders tr td{
+        min-width: 350px;
+        border: 1px solid #e1e0e0;
+        padding: 5px;
+    }
+    ul{
+        margin-left: 0;
+    }
+    ul li{
+        list-style: none;
+    }
+</style>
+<h1>Список заказов</h1>
+<table class="show_orders">
+    <tr>
+        <td>Ид</td>
+        <td>ФИО/Компания</td>
+        <td>Тип покупателя</td>
+        <td>Телефон</td>
+        <td>Email</td>
+        <td>Адрес</td>
+        <td>Индекс</td>
+        <td>Способ оплаты</td>
+        <td>Способ доставки</td>
+        <td>Корзина</td>
+        <td>Итого</td>
+        <td>Комментарий</td>
+    </tr>
+    <foreach orders_list>
+        <tr>
+            <td>{.id}</td>
+            <td>{.name}</td>
+            <td>{.customer_type_f}</td>
+            <td>{.phone}</td>
+            <td>{.email}</td>
+            <td>{.address}</td>
+            <td>{.address_index}</td>
+            <td>{.payment_account_f}</td>
+            <td>{.delivery_f}</td>
+            <td>{.cart}</td>
+            <td>{.finish_price}</td>
+            <td>{.comment}</td> 
+        </tr>
+    </foreach>
+</table>

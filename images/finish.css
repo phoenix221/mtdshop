@@ -1169,7 +1169,7 @@ footer {
   flex-wrap: wrap;
 }
 #main_products_show ul li {
-  height: 265px;
+  height: 280px;
 }
 @media (max-width: 768px) {
   #main_products_show ul li {
@@ -1634,21 +1634,18 @@ footer {
   font-size: 14px;
   line-height: 16px;
   font-weight: 500;
+  margin-right: 10px;
 }
 .btn-cancel:hover, .btn-cancel:active, .btn-cancel:focus {
   opacity: 0.75;
+  color: #9f6dac;
   text-decoration: none;
 }
 
 .items_order_btn {
   text-align: right;
   margin: 0;
-}
-.items_order_btn button {
-  margin-right: 10px;
-}
-.items_order_btn button:last-child {
-  margin-right: 0;
+  position: relative;
 }
 
 .politic_block {
@@ -1673,6 +1670,51 @@ footer {
   font-size: 14px;
   line-height: 14px;
   font-weight: 500;
+}
+
+.red {
+  color: #bc1414;
+}
+
+.finsih_order {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.finsih_order p {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 500;
+}
+.finsih_order p span {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 600;
+  color: #7c3d8e;
+}
+.finsih_order a {
+  color: #7c3d8e;
+}
+
+.btn_placinig {
+  width: 140px !important;
+  border-radius: 10px !important;
+}
+.btn_placinig.disabled {
+  opacity: 0.5;
+}
+.btn_placinig.disabled:hover, .btn_placinig.disabled:active, .btn_placinig.disabled:focus {
+  background: #7c3d8e !important;
+}
+
+.loading {
+  display: none;
+  position: absolute;
+  top: 8px;
+  left: -35px;
+}
+.loading img {
+  width: 25px;
+  height: auto;
 }
 
 /*# sourceMappingURL=finish.css.map */
