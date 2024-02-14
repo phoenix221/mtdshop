@@ -190,3 +190,14 @@ function delete_cart(elem){
 	});
 }
 
+function openclose(el){
+	let block = $(el);
+	let item = block.data('target');
+	$(item).on('show.bs.collapse', function(){
+		$(block).find('i').removeClass('mdi-chevron-down').addClass('mdi-chevron-up');
+	});
+	$(item).on('hide.bs.collapse', function(){
+		$(block).find('i').removeClass('mdi-chevron-up').addClass('mdi-chevron-down');
+	});
+}
+

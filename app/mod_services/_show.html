@@ -1,8 +1,16 @@
 <div class="container">
     <div class="services-view">
-        <img src="{.image}" alt="">
-        <h1>{.title}{{edit}}</h1>
+        <div class="services-view-img">
+            <img src="{.image}" alt="">
+        </div>
+        <div class="services-view-info">
+            <h1>{.title}{{edit}}</h1>
+            {.anons}
+            <a href="" class="btn-request">Оставить заявку</a>
+        </div>
+    </div>
+    <hr>
+    <div class="services-view-block-text">
         {.text}
-        <a href="" class="btn-request">Оставить заявку</a>
     </div>
 </div>
