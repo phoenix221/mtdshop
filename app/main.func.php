@@ -12,6 +12,7 @@ function main()
     d()->o = d()->Option;
     d()->page_list = d()->Page->where('is_menu = 1');
     d()->category_list = d()->Category->where('is_active = 1');
+    d()->services_list = d()->Service;
     if($_SESSION['cart']){
         $cart = $_SESSION['cart'];
         d()->cart_count = count($cart);

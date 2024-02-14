@@ -16,5 +16,9 @@ class Service extends ActiveRecord
 	function link(){
 		return $this->get('url').'/';
 	}
+
+	function link_main(){
+		return '/uslugi/'.$this->get('url').'/';
+	}
 }
 

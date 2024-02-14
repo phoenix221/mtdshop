@@ -62,7 +62,18 @@
                 </div>
                 <ul>
                     <foreach page_list>
+                        @if(d()->this->title == 'Услуги'):
+                        <li class="services-nav">
+                            <a href="{.link}">{.title}</a>
+                            <ul class="services-navbar">
+                                <foreach services_list>
+                                    <li><a href="{.link_main}">{.title}</a></li>
+                                </foreach>
+                            </ul>
+                        </li>
+                        @else:
                         <li><a href="{.link}">{.title}</a></li>
+                        @endif;
                     </foreach>
                 </ul>
             </div>

@@ -235,6 +235,7 @@ nav{
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    padding: 0;
     @media (max-width: 768px){
         flex-direction: column-reverse;
     }
@@ -245,11 +246,11 @@ nav ul{
     justify-content: flex-start;
     align-items: center;
     padding-left: 0;
-    margin: 3px 0;
+    margin: 0;
 
     li{
         list-style: none;
-        margin: 3px 15px;
+        padding: 13px 15px;
 
         a{
             color: $color1;
@@ -324,6 +325,7 @@ nav ul{
         text-align: left;
         margin: 0;
         border-bottom: 1px solid $color4;
+        padding: 5px 0;
         &:last-child{
             border-bottom: none;
         }
@@ -1600,5 +1602,32 @@ footer{
         font-size: 20px;
         line-height: 14px;
         color: inherit;
+    }
+}
+.services-nav{
+    position: relative;
+    &:hover .services-navbar, &:focus .services-navbar, &:active .services-navbar{
+        display: flex;
+    }
+}
+.services-navbar{
+    display: none;
+    position: absolute;
+    top: 43px;
+    left: 0;
+    z-index: 2;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 300px;
+    background: $color4;
+    border-radius: 0 0 5px 5px;
+    padding: 5px;
+
+    li{
+        padding: 10px;
+        border-bottom: 1px solid $color3;
+        &:last-child{
+            border-bottom: none;
+        }
     }
 }
