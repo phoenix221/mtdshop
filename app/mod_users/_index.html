@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="users-block">
+        @if(d()->show_block):
+        <ul class="user-sidebar">
+            <li class="active" data-type="personal">Личные данные</li>
+            <li data-type="orders">Список закзов</li>
+            <li data-type="points">Бонусы</li>
+            <li data-type="exit">Выйти</li>
+        </ul>
+        <ul class="user_show_block">
+            <li class="user_items show" id="personal">
+                <h1>Личные данные</h1>
+                <ul>
+                    <li>Имя / Название компании: <span>{.name}</span></li>
+                    <li>Тип пользователя: <span>{.type_fun}</span></li>
+                    <li>Номер телефона: <span>{.phone}</span></li>
+                    <li>Email: <span>{.email}</span></li>
+                    <li>Адрес: <span>{.address}</span></li>
+                    <li>Индекс: <span>{.address_index}</span></li>
+                </ul>
+                <a href="" data-toggle="modal" data-target="#modal_edit_user" class="btn-request">Редактировать данные</a>
+            </li>
+            <li class="user_items" id="orders">
+                <h2>Список заказов</h2>
+                <ul>
+                    <foreach orders_list>
+                        <li>
+                            <p>Заказ № {.id}</p>
+                            <p>Сумма заказа: {.finish_price}</p>
+                        </li>
+                    </foreach>
+                </ul>
+            </li>
+        </ul>
+        @else:
+        <p>Для просмотра страницы <a href="" data-toggle="modal" data-target="#modal_auth" class="auth-btn">авторизуйтесь</a></p>
+        @endif;
+    </div>
+</div>

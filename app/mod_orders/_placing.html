@@ -6,11 +6,11 @@
             <p>Тип плательщика</p>
             <div class="checkbox_block">
                 <div class="customer_items checkbox_items">
-                    <input id="type_1" type="radio" name="customer_type" value="1" class="checbox_customer" checked>
+                    <input id="type_1" type="radio" name="customer_type" value="1" class="checbox_customer" {checked_1}>
                     <label for="type_1">Физическое лицо</label>
                 </div>
                 <div class="customer_items checkbox_items">
-                    <input id="type_2" type="radio" name="customer_type" value="2" class="checbox_customer">
+                    <input id="type_2" type="radio" name="customer_type" value="2" class="checbox_customer" {checked_2}>
                     <label for="type_2">Юридическое лицо</label>
                 </div>
             </div>
@@ -44,15 +44,15 @@
             <p>Данные покупателя</p>
             <div class="customer_items">
                 <label for="fio">ФИО/Название компании<span class="red">*</span></label>
-                <input type="text" name="fio" id="fio" value="" required>
+                <input type="text" name="fio" id="fio" value="{name}" required>
             </div>
             <div class="customer_items">
                 <label for="email">Email<span class="red">*</span></label>
-                <input type="email" name="email" id="email" value="" required>
+                <input type="email" name="email" id="email" value="{email}" required>
             </div>
             <div class="customer_items">
                 <label for="phone">Номер телефона<span class="red">*</span></label>
-                <input type="text" name="phone" id="phone" maxlength="13" value="" required>
+                <input type="text" name="phone" id="phone" maxlength="13" value="{phone}" required>
             </div>
             <div class="customer_items">
                 <label for="comment">Комментарии</label>

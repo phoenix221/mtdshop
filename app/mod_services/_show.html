@@ -4,9 +4,9 @@
             <img src="{.image}" alt="">
         </div>
         <div class="services-view-info">
-            <h1>{.title}{{edit}}</h1>
+            <h1 data-title="{.title}">{.title}{{edit}}</h1>
             {.anons}
-            <a href="" class="btn-request">Оставить заявку</a>
+            <a href="" class="btn-request" data-toggle="modal" data-target="#modal_service" onclick="service_order_show(this);">Оставить заявку</a>
         </div>
     </div>
     <hr>

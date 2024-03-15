@@ -1,0 +1,20 @@
+<div id="error_text"></div>
+<form id="reg_form" method="post" class="mdl-auth-form">
+    <label for="email">Email</label>
+    <input type="text" name="email" id="reg_email">
+    <label for="type_user">Тип</label>
+    <select name="type_user" id="reg_type_user">
+        <option value="type_1">Физическое лицо</option>
+        <option value="type_2">Юридическое лицо</option>
+    </select>
+    <label for="name">Имя / Название компании</label>
+    <input type="text" name="name" id="reg_name">
+    <label for="phone">Номер телефона</label>
+    <input type="text" name="phone" id="reg_phone">
+    <label for="password">Пароль</label>
+    <input type="password" name="password" id="reg_password">
+    <label for="rep_password">Подтвердить пароль</label>
+    <input type="password" name="rep_password" id="reg_repeat_password">
+    <button type="button" class="btn-cancel btn_auth_close" data-dismiss="modal" aria-label="Close">Закрыть</button>
+    <input type="submit" class="btn_order btn_reg_form" id="registration" value="Зарегистрироваться">
+</form>

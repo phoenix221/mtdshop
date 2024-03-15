@@ -26,7 +26,11 @@
                 </div>
                 <div class="header-block-right">
                     <a href="/favorites/"><i class="mdi mdi-heart"></i>Избранное</a>
-                    <a href="#" class="auth-btn"><i class="mdi mdi-account"></i>Войти</a>
+                    @if($_SESSION['user']):
+                    <a href="/personal_accaunt/" class="auth-btn"><i class="mdi mdi-account"></i>Личный кабинет</a>
+                    @else:
+                    <a href="#" data-toggle="modal" data-target="#modal_auth" class="auth-btn"><i class="mdi mdi-account"></i>Войти</a>
+                    @endif;
                 </div>
                 
             </div>
@@ -38,7 +42,7 @@
                 <a href="/"><img src="{o.logo}" class="logo" alt="Logo"></a>
                 <div class="header-search">
                     <form method="get" action="/search/">
-                        <input type="text" placeholder="Найти товар">
+                        <input type="text" placeholder="Найти товар" name="search">
                         <button><i class="mdi mdi-magnify"></i></button>
                     </form>
                 </div>
@@ -149,8 +153,118 @@
         <span class="tooltiptext-orders">Перейти в корзину</span>
     </div>
     <div class="block-feedback">
-        <button class="btn-feedback"><i class="mdi mdi-phone-alert"></i></button>
+        <button class="btn-feedback" data-toggle="modal" data-target="#modal_feedback"><i class="mdi mdi-phone-alert"></i></button>
         <span class="tooltiptext">Заказать звонок</span>
+    </div>
+    <div class="block-whatsapp">
+        <a href="{o.whatsapp_link}" class="btn-whatsapp"><i class="mdi mdi-whatsapp"></i></a>
+        <span class="tooltiptext-whatsapp">Whatsapp</span>
+    </div>
+</div>
+<div id="modal_auth" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content mdl-auth">
+            <div class="modal-header">
+                <span id="mdl_auth_header">Авторизоваться</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="auth">{{authorization_tpl}}</div>
+                <div id="reg" style="display: none;">{{registration_tpl}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal_feedback" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content mdl-auth">
+            <div class="modal-header">
+                <span id="mdl_auth_header">Заказать звонок</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="error_text"></div>
+                <form id="feedback_form" method="post" class="mdl-auth-form">
+                    <label for="name">Имя / Название компании</label>
+                    <input type="text" name="name" id="feedback_name" value="{name_user}">
+                    <label for="phone">Номер телефона</label>
+                    <input type="text" name="phone" id="feedback_phone" maxlength="13" value="{phone_user}" required>
+                    <label for="comment">Комментарий</label>
+                    <input type="text" name="comment" id="feedback_comment">
+                    <button type="button" class="btn-cancel btn_auth_close" data-dismiss="modal" aria-label="Close">Закрыть</button>
+                    <input type="submit" class="btn_order btn_auth" id="feedback" value="Заказать">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal_service" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content mdl-auth">
+            <div class="modal-header">
+                <span id="mdl_auth_header">Заказать услугу</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="error_text"></div>
+                <form id="service_form" method="post" class="mdl-auth-form">
+                    <label for="name">Имя / Название компании</label>
+                    <input type="text" name="name" id="service_name" value="{name_user}">
+                    <label for="phone">Номер телефона</label>
+                    <input type="text" name="phone" id="service_phone" maxlength="13" value="{phone_user}" required>
+                    <label for="service_title">Название услуги</label>
+                    <input type="text" name="service_title" id="service_title" value="{.title}" disabled>
+                    <label for="comment">Комментарий</label>
+                    <input type="text" name="comment" id="service_comment">
+                    <button type="button" class="btn-cancel btn_auth_close" data-dismiss="modal" aria-label="Close">Закрыть</button>
+                    <input type="submit" class="btn_order btn_auth" id="service" value="Заказать">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal_edit_user" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content mdl-auth">
+            <div class="modal-header">
+                <span id="mdl_auth_header">Редактировать данные</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="error_text"></div>
+                <form id="edit_form" method="post" class="mdl-auth-form">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="edit_email">
+                    <label for="type_user">Тип</label>
+                    <select name="type_user" id="edit_type_user">
+                        <option value="type_1">Физическое лицо</option>
+                        <option value="type_2">Юридическое лицо</option>
+                    </select>
+                    <label for="name">Имя / Название компании</label>
+                    <input type="text" name="name" id="edit_name">
+                    <label for="phone">Номер телефона</label>
+                    <input type="text" name="phone" id="edit_phone">
+                    <label for="address">Адрес</label>
+                    <input type="text" name="address" id="edit_address">
+                    <label for="address_index">Индекс</label>
+                    <input type="text" name="address_index" id="edit_address_index">
+                    <label for="password">Пароль</label>
+                    <input type="password" name="password" id="edit_password">
+                    <label for="rep_password">Подтвердить пароль</label>
+                    <input type="password" name="rep_password" id="edit_repeat_password">
+                    <button type="button" class="btn-cancel btn_auth_close" data-dismiss="modal" aria-label="Close">Закрыть</button>
+                    <input type="submit" class="btn_order btn_reg_form" id="edit_user" value="Сохранить">
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <!--<script type="text/javascript" src="/js/jquery.min.js"></script>-->

@@ -258,6 +258,7 @@ nav ul{
             &:hover, &:active, &:focus{
                 color: $color2;
                 border-bottom: 3px solid $color2;
+                text-decoration: none;
             }
         }
         @media (max-width: 768px){
@@ -531,7 +532,7 @@ footer{
         display: block;
     }
 }
-.btn-feedback{
+.btn-feedback, .btn-whatsapp{
     border: none;
     background: none;
     color: $color4;
@@ -546,22 +547,41 @@ footer{
         margin-right: 0;
     }
 }
-.tooltiptext, .tooltiptext-orders{
+.tooltiptext, .tooltiptext-orders, .tooltiptext-whatsapp{
     display: none;
     width: 135px;
     position: absolute;
-    top: 7px;
-    right: 50px;
     background: $color2;
     font-size: 14px;
     color: $color4;
     padding: 2px 5px;
     border-radius: 7px;
 }
+.tooltiptext{
+    top: 7px;
+    right: 50px;
+    @media (max-width: 600px){
+        top: 60px;
+    }
+}
+.tooltiptext-orders{
+    top: 7px;
+    right: 50px;
+}
+.tooltiptext-whatsapp{
+    top: 61px;
+    right: 50px;
+    @media (max-width: 600px){
+        top: 107px;
+    }
+}
 .block-feedback:hover .tooltiptext{
     display: block;
 }
 .block-orders:hover .tooltiptext-orders{
+    display: block;
+}
+.block-whatsapp:hover .tooltiptext-whatsapp{
     display: block;
 }
 .main-block-title{
@@ -947,6 +967,10 @@ footer{
     border: 1px solid $color1;
     border-radius: 5px;
     padding: 10px 15px;
+    &:active, &:focus, &:hover{
+        text-decoration: none;
+        color: $color3;
+    }
 }
 .services-view{
     display: flex;
@@ -1010,6 +1034,10 @@ footer{
     padding: 10px 15px;
     margin-top: 15px;
     display: inline-block;
+    &:hover, &:focus, &:active{
+        color: $color2;
+        text-decoration: none;
+    }
 }
 .sales-block{
     display: flex;
@@ -1629,5 +1657,131 @@ footer{
         &:last-child{
             border-bottom: none;
         }
+    }
+}
+.mdl-auth{
+    .modal-header{
+        span{
+            font-size: 18px;
+            line-height: 18px;
+            font-weight: 500;
+        }
+    }
+    .modal-body{
+        display: inline-block;
+    }
+}
+.mdl-auth-form{
+    margin: 15px 0;
+    input, select{
+        width: 100%;
+        line-height: 20px;
+        padding: 10px;
+        border: 1px solid $color3;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    label{
+        font-size: 16px;
+        line-height: 16px;
+        font-weight: 500;
+    }
+}
+.btn_auth{
+    width: 125px !important;
+    margin-top: 15px;
+    border-radius: 10px !important;
+    padding: 8px 15px !important;
+}
+.btn_reg_form{
+    width: 200px !important;
+    margin-top: 15px;
+    border-radius: 10px !important;
+    padding: 8px 15px !important;
+}
+.btn_auth_close{
+    width: 125px !important;
+    margin-top: 15px;
+}
+.btn-reg{
+    color: $color1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    &:hover, &:active, &:focus{
+        text-decoration: underline;
+    }
+}
+.users-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin: 50px 0;
+}
+.user-sidebar{
+    width: 25%;
+    border-right: 1px solid $color1;
+    padding: 15px;
+    li{
+        list-style: none;
+        font-size: 16px;
+        line-height: 16px;
+        font-weight: 500;
+        color: $color1;
+        margin: 10px 0;
+        cursor: pointer;
+    }
+    .active{
+        color: $color3;
+        text-decoration: underline;
+    }
+}
+.user_show_block{
+    width: 65%;
+}
+.user_items{
+    list-style: none;
+    display: none;
+    ul li{
+        list-style: none;
+        font-size: 16px;
+        line-height: 16px;
+        font-weight: 400;
+        margin: 5px 0;
+        span{
+            font-weight: 600;
+        }
+    }
+    &.show{
+        display: block;
+    }
+    h2, h1{
+        font-size: 22px;
+        line-height: 22px;
+        font-weight: 600;
+        margin-bottom: 25px;
+    }
+}
+.brand_block{
+    width: 100%;
+    margin: 50px 0;
+}
+.brand_items{
+    width: 100%;
+    height: 100px;
+}
+#carouselBrand .carousel-inner .carousel-item.active,#carouselBrand .carousel-inner .carousel-item-next, #carouselBrand .carousel-inner .carousel-item-prev{display:flex}
+#carouselBrand .carousel-inner .carousel-item-right.active, #carouselBrand .carousel-inner .carousel-item-next{transform:translateX(25%)}
+#carouselBrand .carousel-inner .carousel-item-left.active, #carouselBrand .carousel-inner .carousel-item-prev{transform:translateX(-25%)}
+#carouselBrand .carousel-inner .carousel-item-right, #carouselBrand .carousel-inner .carousel-item-left{transform:translateX(0)}
+#carouselBrand .carousel-inner .carousel-item {height: auto;}
+#carouselBrand{
+    .carousel-control-next-icon, & .carousel-control-prev-icon{
+        padding: 20px;
+        border-radius: 20px;
+        background-color: $color1;
+        background-size: 24px;
     }
 }

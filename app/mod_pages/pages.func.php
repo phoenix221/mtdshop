@@ -27,6 +27,21 @@ class PagesController
 		d()->slides_list = d()->Slide->where('is_active = 1');
 		d()->stikers_list = d()->Stiker->where('is_active = 1');
 		d()->category_popular = d()->Category->where('is_active = 1 and is_main = 1');
+		d()->brand_list = d()->Brand->where('is_active = 1');
+	}
+
+	function search(){
+		$_SESSION['dbg3'] = $_GET;
+		d()->title_search = "Поиск";
+		if($_GET['brand']){
+			$brand = d()->Brand->where('url = ?', $_GET['brand']);
+			d()->product_list = d()->Product->where('is_active = 1 and brand LIKE ?', '%|'.$brand->id.'|%');
+			d()->title_search .= " по бренду - ".$brand->title;
+		}
+		if($_GET['search']){
+			d()->product_list = d()->Product->where('is_active = 1')->search('title','text', $_GET['search']);
+			$_SESSION['dbg4'] = d()->product_list;
+		}
 	}
 }
 

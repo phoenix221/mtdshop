@@ -25,6 +25,12 @@ function main()
         d()->cart_count = 0;
         d()->hide = 'hide';
     }
+    if($_SESSION['user']){
+        $u = d()->User($_SESSION['user']);
+        d()->name_user = $u->name;
+        d()->phone_user = $u->phone;
+        d()->email_user = $u->email;
+    }
     
 	d()->content = d()->content();
 	print d()->render('main_tpl');
@@ -186,7 +192,6 @@ function ajax_create_order(){
     if($_POST['data']){
         $option = d()->Option(1);
         $data = explode('&', $_POST['data']);
-        $_SESSION['dbg'] = $data;
         $co = Array();
         $result = Array();
         foreach ($data as $v){
@@ -248,7 +253,7 @@ function ajax_create_order(){
         $o->delivery = $co['delivery'];
         $o->name = urldecode($co['fio']);
         $o->email = urldecode($co['email']);
-        $o->phone = $co['phone'];
+        $o->phone = d()->convert_phone($co['phone']);
         $o->comment = urldecode($co['comment']);
         $o->finish_price = $_POST['finish_price'];
         $o->cart = json_encode($_SESSION['cart']);
@@ -329,4 +334,238 @@ function show_orders_list(){
         return d()->show_orders_list_tpl();
     }
     d()->page_not_found();
+}
+
+function ajax_registr_user(){
+    if($_POST['data']){
+        $data = explode('&', $_POST['data']);
+        $reg_data = array();
+        $res = array();
+        foreach ($data as $k_data=>$v_data){
+            $d = explode('=', $v_data);
+            $reg_data[$d[0]] = urldecode($d[1]);
+        }
+
+        if($reg_data['type_user'] == 'type_1'){
+            $type = 1;
+        }else{
+            $type = 2;
+        }
+
+        if(empty($reg_data['email'])){
+            $res['error'] = 'error';
+            $res['text'] = 'Поле email пустое, введите email';
+            return json_encode($res);
+        }
+
+        if(empty($reg_data['password'])){
+            $res['error'] = 'error';
+            $res['text'] = 'Поле пароль пустое, введите пароль';
+            return json_encode($res);
+        }
+
+        if(empty($reg_data['rep_password'])){
+            $res['error'] = 'error';
+            $res['text'] = 'Поле подтвержение пароля пустое, введите подтвержение парол';
+            return json_encode($res);
+        }
+
+        if($reg_data['password'] != $reg_data['rep_password']){
+            $res['error'] = 'error';
+            $res['text'] = 'Подтверждение пароля не совпадает, введите пароль заново';
+            return json_encode($res);
+        }
+
+        $u = d()->User->where('email = ? or phone = ?', $reg_data['email'], d()->convert_phone($reg_data['phone']));
+        if(!$u->is_empty){
+            $res['error'] = 'error';
+            $res['text'] = 'Такой пользователь уже существует';
+            return json_encode($res);
+        }
+
+        $user = d()->User->new;
+        $user->email = $reg_data['email'];
+        $user->name = $reg_data['name'];
+        $user->phone = d()->convert_phone($reg_data['phone']);
+        $user->type = $type;
+        $user->password = md5($reg_data['password']);
+        $user->save;
+
+        $res['error'] = 'sucsses';
+        return json_encode($res); 
+    }
+}
+
+function ajax_auth_user(){
+    if($_POST['data']){
+        $data = explode('&', $_POST['data']);
+        $auth_data = array();
+        $res = array();
+        foreach ($data as $k_data=>$v_data){
+            $d = explode('=', $v_data);
+            $auth_data[$d[0]] = urldecode($d[1]);
+        }
+
+        if(empty($auth_data['login'])){
+            $res['error'] = 'error';
+            $res['text'] = 'Поле email пустое, введите email';
+            return json_encode($res);
+        }
+
+        if(empty($auth_data['password'])){
+            $res['error'] = 'error';
+            $res['text'] = 'Поле пароль пустое, введите пароль';
+            return json_encode($res);
+        }
+
+        $u = d()->User->where('email = ? or phone =?', $auth_data['login'], d()->convert_phone($auth_data['login']));
+        if(!$u->is_empty){
+            if(md5($auth_data['password']) == $u->password){
+                $_SESSION['user'] = $u->id;
+                $res['error'] = 'sucsses';
+                return json_encode($res);
+            }else{
+                $res['error'] = 'error';
+                $res['text'] = 'Пароль введен неверно';
+                return json_encode($res);
+            }
+        }else{
+            $res['error'] = 'error';
+            $res['text'] = 'Пользователя с данным email нет в базе';
+            return json_encode($res);
+        }
+    }
+}
+
+function ajax_user_data(){
+    if($_POST['type'] == 'personal'){
+        d()->user = d()->User($_SESSION['user']);
+        return d()->user_personal_tpl();
+    }
+}
+
+function ajax_logout(){
+    unset($_SESSION['user']);
+}
+
+function ajax_feedback(){
+    if($_POST['data']){
+        $data = explode('&', $_POST['data']);
+        $feedback_data = array();
+        $res = array();
+        foreach ($data as $k_data=>$v_data){
+            $d = explode('=', $v_data);
+            $feedback_data[$d[0]] = urldecode($d[1]);
+        }
+
+        if(empty($feedback_data['name'])){
+            $res['error'] = 'error';
+            $res['text'] = 'Укажите Ваше имя или название компании';
+            return json_encode($res);
+        }
+        if(empty($feedback_data['phone'])){
+            $res['error'] = 'error';
+            $res['text'] = 'Укажите номер телефона';
+            return json_encode($res);
+        }
+
+        d()->name = $feedback_data['name'];
+        d()->phone = $feedback_data['phone'];
+        d()->comment = $feedback_data['comment'];
+        $option = d()->Option(1);
+        $title = "Заказ звонка";
+        $text_message = d()->feedback_notifity_tpl();
+        $emails = explode(',', $option->email_notifity);
+        foreach($emails as $em){
+            d()->Mail->to(trim($em));
+            d()->Mail->set_smtp($option->mail_server,$option->mail_port,$option->mail_address,$option->mail_password,$option->smail_protocol);
+            d()->Mail->from($option->mail_from,$option->mail_title);
+            d()->Mail->subject($title);
+            d()->Mail->message($text_message);
+            d()->Mail->send();
+        }
+        $res['error'] = 'sucsses';
+        $res['test'] = 'Заявка на звонок успешно отправлено. В ближайшее время с Вами свяжется менеджер';
+        return json_encode($res);
+    }
+}
+
+function ajax_service(){
+    if($_POST['data']){
+        $data = explode('&', $_POST['data']);
+        $feedback_data = array();
+        $res = array();
+        foreach ($data as $k_data=>$v_data){
+            $d = explode('=', $v_data);
+            $feedback_data[$d[0]] = urldecode($d[1]);
+        }
+
+        if(empty($feedback_data['name'])){
+            $res['error'] = 'error';
+            $res['text'] = 'Укажите Ваше имя или название компании';
+            return json_encode($res);
+        }
+        if(empty($feedback_data['phone'])){
+            $res['error'] = 'error';
+            $res['text'] = 'Укажите номер телефона';
+            return json_encode($res);
+        }
+
+        d()->name = $feedback_data['name'];
+        d()->phone = $feedback_data['phone'];
+        d()->comment = $feedback_data['comment'];
+        d()->service = $feedback_data['service_title'];
+        $option = d()->Option(1);
+        $title = "Заказ услсги";
+        $text_message = d()->service_notifity_tpl();
+        $emails = explode(',', $option->email_notifity);
+        foreach($emails as $em){
+            d()->Mail->to(trim($em));
+            d()->Mail->set_smtp($option->mail_server,$option->mail_port,$option->mail_address,$option->mail_password,$option->smail_protocol);
+            d()->Mail->from($option->mail_from,$option->mail_title);
+            d()->Mail->subject($title);
+            d()->Mail->message($text_message);
+            d()->Mail->send();
+        }
+        $res['error'] = 'sucsses';
+        $res['test'] = 'Заявка на звонок успешно отправлено. В ближайшее время с Вами свяжется менеджер';
+        return json_encode($res);
+    }
+}
+
+function ajax_edit_user(){
+    if($_POST['data']){
+        $data = explode('&', $_POST['data']);
+        $edit_data = array();
+        $res = array();
+        foreach ($data as $k_data=>$v_data){
+            $d = explode('=', $v_data);
+            $edit_data[$d[0]] = urldecode($d[1]);
+        }
+
+        if($edit_data['type_user'] == 'type_1'){
+            $type = 1;
+        }else{
+            $type = 2;
+        }
+
+        if($edit_data['password'] != $edit_data['rep_password']){
+            $res['error'] = 'error';
+            $res['text'] = 'Подтверждение пароля не совпадает, введите пароль заново';
+            return json_encode($res);
+        }
+
+        $user = d()->User($_SESSION['user']);
+        if($edit_data['email']) $user->email = $edit_data['email'];
+        if($edit_data['name']) $user->name = $edit_data['name'];
+        if($edit_data['phone']) $user->phone = d()->convert_phone($edit_data['phone']);
+        if($type) $user->type = $type;
+        if($edit_data['password']) $user->password = md5($edit_data['password']);
+        if($edit_data['address']) $user->address = $edit_data['address'];
+        if($edit_data['address_index']) $user->address_index = $edit_data['address_index'];
+        $user->save;
+
+        $res['error'] = 'sucsses';
+        return json_encode($res); 
+    }
 }

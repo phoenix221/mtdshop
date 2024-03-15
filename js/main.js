@@ -1,6 +1,7 @@
 // JavaScript Document
 $(document).ready(function () {
 	main_slider();
+	brand_slider();
 
 	if($('.cart-text-description').length){
 		block_cart_desription();
@@ -24,6 +25,51 @@ $(document).ready(function () {
 		create_order_func('order_form');
 		return false;
 	});
+
+	$('#registration').on('click', function(e){
+		e.preventDefault();
+		registr_user('reg_form');
+		return false;
+	});
+
+	$('#authorization').on('click', function(e){
+		e.preventDefault();
+		auth_user('auth_form');
+		return false;
+	});
+
+	$('#feedback').on('click', function(e){
+		e.preventDefault();
+		feedback('feedback_form');
+		return false;
+	});
+
+	$('#service').on('click', function(e){
+		e.preventDefault();
+		service('service_form');
+		return false;
+	});
+
+	$('#edit_user').on('click', function(e){
+		e.preventDefault();
+		edit_user('edit_form');
+		return false;
+	});
+
+	$('.user-sidebar li').on('click', function(e){
+		let type = $(this).data('type');
+		let li = $('.user-sidebar').find('li');
+		li.removeClass('active');
+		$(this).addClass('active');
+		let li2 = $('.user_show_block').find('li');
+		li2.removeClass('show');
+		$('#'+type).addClass('show');
+		if(type == 'exit'){
+			logout_user();
+		}
+	});
+
+	
 });
 
 function captcha_clean(){
@@ -37,6 +83,35 @@ function main_slider(){
 	const carousel = new bootstrap.Carousel(myCarousel, {
   		interval: 2000,
   		touch: false
+	});
+}
+
+function brand_slider(){
+	if(!$('#carouselBrand').length)return;
+	const myCarouselBrand = document.querySelector('#carouselBrand');
+
+	const carousel = new bootstrap.Carousel(myCarouselBrand, {
+  		interval: 2000,
+  		touch: false,
+		items: 4,
+		mouseDrag: true
+	});
+
+	$('#carouselBrand .carousel-item').each(function(){
+		var next = $(this).next();
+		if (!next.length) {
+		next = $(this).siblings(':first');
+		}
+		next.children(':first-child').clone().appendTo($(this));
+	
+		for (var i=0;i<2;i++) {
+			next=next.next();
+			if (!next.length) {
+				next = $(this).siblings(':first');
+			  }
+	
+			next.children(':first-child').clone().appendTo($(this));
+		  }
 	});
 }
 
@@ -201,3 +276,100 @@ function openclose(el){
 	});
 }
 
+function registration(){
+	$('#auth').hide();
+	$('#reg').show();
+	$('#mdl_auth_header').html('Регистрация');
+}
+
+function registr_user(text){
+	let rg = $('#'+text).serialize();
+	let hint = $('#error_text');
+	$.post('/ajax/register_user', {data: rg}, function(result){
+		let r = JSON.parse(result);
+		if(r['error'] == 'error'){
+			hint.html(r['text']).addClass('error');
+		}
+		if(r['error'] == 'sucsses'){
+			$('#reg').hide();
+			$('#auth').show();
+			$('#mdl_auth_header').html('Авторизоваться');
+		}
+	});
+}
+
+function auth_user(text){
+	let au = $('#'+text).serialize();
+	let hint = $('#error_text');
+	$.post('/ajax/auth_user', {data: au}, function(result){
+		let r = JSON.parse(result);
+		if(r['error'] == 'error'){
+			hint.html(r['text']).addClass('error');
+		}
+		if(r['error'] == 'sucsses'){
+			window.location.href = '/personal_accaunt';
+		}
+	});
+}
+
+function logout_user(){
+	$.post('/ajax/logout', function(data){
+		window.location.href = '/';
+	});
+}
+
+function feedback(text){
+	let fd = $('#'+text).serialize();
+	let hint = $('#error_text');
+	$.post('/ajax/feedback', {data: fd}, function(result){
+		let r = JSON.parse(result);
+		if(r['error'] == 'error'){
+			hint.html(r['text']).addClass('error');
+		}
+		if(r['error'] == 'sucsses'){
+			hint.html(r['text']).addClass('sucsses');
+		}
+	});
+}
+
+function service(text){
+	let sd = $('#'+text).serialize();
+	let hint = $('#error_text');
+	$.post('/ajax/service', {data: sd}, function(result){
+		let r = JSON.parse(result);
+		if(r['error'] == 'error'){
+			hint.html(r['text']).addClass('error');
+		}
+		if(r['error'] == 'sucsses'){
+			hint.html(r['text']).addClass('sucsses');
+		}
+	});
+}
+
+function service_order(el){
+	let item = $(el).closest('li');
+	let id = item.data('id');
+	let ttl = item.find('.services-ttl').html();
+	$('#service_title').val(ttl);
+}
+
+function service_order_show(el){
+	let block = $(el).closest('.services-view');
+	let ttl = block.find('h1').data('title');
+	console.log(ttl);
+	$('#service_title').val(ttl);
+}
+
+function edit_user(text){
+	let ed = $('#'+text).serialize();
+	let hint = $('#error_text');
+	$.post('/ajax/edit_user', {data: ed}, function(result){
+		let r = JSON.parse(result);
+		if(r['error'] == 'error'){
+			hint.html(r['text']).addClass('error');
+		}
+		if(r['error'] == 'sucsses'){
+			window.location.href = '/personal_accaunt';
+		}
+	});
+}
