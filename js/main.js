@@ -373,3 +373,22 @@ function edit_user(text){
 		}
 	});
 }
+
+function add_points(el){
+	let block = $(el).closest('.block_points');
+	let points = $('input[name=points]').val();
+	let hint = $('#points_error');
+	console.log(points);
+	$.post('/ajax/add_points', {points:points}, function(data){
+		console.log(data);
+		let r = JSON.parse(data);
+		if(r['error'] == 'sucsses'){
+			$('input[name=points]').val(points);
+			let text = r['text'].toLocaleString('ru-RU')+' <i class="mdi mdi-currency-rub"></i>';
+			$('#finish_price').attr("data-price", r['text']).html(text);
+		}
+		if(r['error'] == 'error'){
+			hint.html(r['text']);
+		}
+	});
+}

@@ -4,7 +4,7 @@
         <ul class="user-sidebar">
             <li class="active" data-type="personal">Личные данные</li>
             <li data-type="orders">Список закзов</li>
-            <li data-type="points">Бонусы</li>
+            <li data-type="points">Бонусные баллы</li>
             <li data-type="exit">Выйти</li>
         </ul>
         <ul class="user_show_block">
@@ -22,14 +22,43 @@
             </li>
             <li class="user_items" id="orders">
                 <h2>Список заказов</h2>
-                <ul>
+                <table class="user_order_table">
+                    <tr class="user_order_table_head">
+                        <td>Номер</td>
+                        <td>Дата</td>
+                        <td>Корзина</td>
+                        <td>Сумма</td>
+                    </tr>
                     <foreach orders_list>
-                        <li>
-                            <p>Заказ № {.id}</p>
-                            <p>Сумма заказа: {.finish_price}</p>
-                        </li>
+                        <tr class="user_order_table_body">
+                            <td>№ {.id}</td>
+                            <td>{.date}</td>
+                            <td class="table_cart">{.cart_user}</td>
+                            <td class="table_price">{.finish_price_user}</td>
+                        </tr>
                     </foreach>
-                </ul>
+                </table>
+            </li>
+            <li class="user_items" id="points">
+                <h2>Бонусные баллы</h2>
+                <p class="count_points">Количество баллов: <span>{.points}</span></p>
+                <h3>История изменения баллов</h3>
+                <table class="user_points_table">
+                    <tr class="user_points_table_head">
+                        <td>Описание</td>
+                        <td>Тип</td>
+                        <td>Количество</td>
+                        <td>Дата</td>
+                    </tr>
+                    <foreach points_list>
+                        <tr class="user_points_table_body">
+                            <td>{.title}</td>
+                            <td>{.type_user}</td>
+                            <td>{.point}</td>
+                            <td>{.date}</td>
+                        </tr>
+                    </foreach>
+                </table>
             </li>
         </ul>
         @else:

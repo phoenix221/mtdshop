@@ -16,11 +16,12 @@ class PagesController
 			}
 			d()->page_not_found();
 		}
-
+		d()->title = d()->this->title.' | '. d()->o->title;
 	}
 
 	function catalog(){
 		d()->category_list = d()->Category->where('is_active = 1');
+		d()->title = 'Каталог | '. d()->o->title;
 	}
 
 	function index(){
@@ -31,7 +32,6 @@ class PagesController
 	}
 
 	function search(){
-		$_SESSION['dbg3'] = $_GET;
 		d()->title_search = "Поиск";
 		if($_GET['brand']){
 			$brand = d()->Brand->where('url = ?', $_GET['brand']);
@@ -40,8 +40,12 @@ class PagesController
 		}
 		if($_GET['search']){
 			d()->product_list = d()->Product->where('is_active = 1')->search('title','text', $_GET['search']);
-			$_SESSION['dbg4'] = d()->product_list;
 		}
+		d()->title = d()->title_search.' | '. d()->o->title;
+	}
+
+	function favorites(){
+		d()->title = 'Избраное | '. d()->o->title;
 	}
 }
 

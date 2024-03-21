@@ -40,5 +40,31 @@ class Order extends ActiveRecord
         }
         return $text;
     }
+
+    function cart_user(){
+        $c = json_decode($this->get('cart'), true);
+        $text = '';
+        foreach ($c as $value){
+            $text .= '<ul>';
+            $text .= '<li>название: <span>'.$value['title'].'</span></li>';
+            $text .= '<li>цена: <span>'.$value['price'].'</span></li>';
+            $text .= '<li>кол-во: <span>'.$value['count'].'</span></li>';
+            $text .= '<li>итого: <span>'.$value['total_price'].'</span></li>';
+            $text .= '</ul>';
+        }
+        return $text;
+    }
+
+    function date()
+    {
+        return date('d.m.Y, H:i', strtotime($this->get('created_at')));
+    }
+
+    function finish_price_user(){
+        if($this->get('finish_price')){
+            return number_format($this->get('finish_price'), 0, '',' ').' руб.';
+        }
+        return '';
+    }
 }
 

@@ -31,7 +31,7 @@ function main()
         d()->phone_user = $u->phone;
         d()->email_user = $u->email;
     }
-    
+    d()->title = d()->o->title;
 	d()->content = d()->content();
 	print d()->render('main_tpl');
 }
@@ -189,6 +189,7 @@ function ajax_addcart(){
 }
 
 function ajax_create_order(){
+    $_SESSION['dbg'] = $_POST['data'];
     if($_POST['data']){
         $option = d()->Option(1);
         $data = explode('&', $_POST['data']);
@@ -244,6 +245,13 @@ function ajax_create_order(){
             return json_encode($result);
             exit;
         }
+        if($_SESSION['user']){
+            $u = d()->User($_SESSION['user']);
+            $user = $u->id;
+        }else{
+            $user = 0;
+        }
+        
 
         $o = d()->Order->new;
         $o->customer_type = $co['customer_type'];
@@ -254,11 +262,25 @@ function ajax_create_order(){
         $o->name = urldecode($co['fio']);
         $o->email = urldecode($co['email']);
         $o->phone = d()->convert_phone($co['phone']);
+        if($_SESSION['points']) $o->points = $_SESSION['points'];
+        $o->user_id = $user;
         $o->comment = urldecode($co['comment']);
         $o->finish_price = $_POST['finish_price'];
         $o->cart = json_encode($_SESSION['cart']);
         d()->order = $o->save_and_load();
 
+        // Списание баллов
+        if($_SESSION['points']){
+            $pnt = d()->Point->where('user_id = ?', $user);
+            $pnt->type = 2;
+            $pnt->title = "Списание баллов за заказ №".d()->order->id;
+            $pnt->point = $_SESSION['points'];
+            $pnt->save;
+            
+            $usr = d()->User($user);
+            $usr->points -= $_SESSION['points'];
+            $usr->save;
+        }
         // отправка уведомлений
         if($option->email_orders){
             $title = "Новый заказ #". d()->order->id;
@@ -274,7 +296,14 @@ function ajax_create_order(){
             }
         }
 
-        unset($_SESSION['cart']);
+        // чистим сессию
+        foreach($_SESSION as $k=>$v){
+            if(
+                $k=='admin' ||
+                $k=='user'
+            )continue;
+            unset($_SESSION[$k]);
+        }
         
         $result['success'] = 'success';
         $result['order'] = d()->order->id;
@@ -568,4 +597,50 @@ function ajax_edit_user(){
         $res['error'] = 'sucsses';
         return json_encode($res); 
     }
+}
+
+function add_points(){
+    $_SESSION['debug'] = $_POST;
+    $u = d()->User($_POST['data']['user_id']);
+    if(!$u->is_empty){
+        if($_POST['data']['type']==2){
+            $u->points = $u->points - $_POST['data']['point'];
+        }else{
+            $u->points = $u->points + $_POST['data']['point'];
+        }
+        $u->save;
+    }
+
+    $n = d()->Point->new;
+    $n->user_id = $_POST['data']['user_id'];
+    $n->created_at = date('Y-m-d H:i:s', date('U')+d()->city->timezone*3600);
+    $n->updated_at = date('Y-m-d H:i:s', date('U')+d()->city->timezone*3600);
+    $n->title = $_POST['data']['title'];
+    $n->point = $_POST['data']['point'];
+    $n->type = $_POST['data']['type'];
+    $n->save;
+
+    return  "<script>window.opener.document.location.href=window.opener.document.location.href;window.open('','_self','');window.close();</script>";
+}
+
+function ajax_add_points(){
+    $result = array();
+    if($_SESSION['user']){
+        $u = d()->User($_SESSION['user']);
+        if($_POST['points'] <= $u->points){
+            $finish_price = cart_prices();
+            $finish_price -= intval($_POST['points']);
+            $_SESSION['points'] = $_POST['points'];
+            $result['error'] = 'sucsses';
+            $result['text'] = $finish_price;
+            return json_encode($result);
+        }else{
+            $result['error'] = 'error';
+            $result['text'] = 'Всего баллов '.$u->points;
+            return json_encode($result);
+        }
+    }
+    $result['error'] = 'error';
+    $result['text'] = 'Необходимо авторизоваться';
+    return json_encode($result);
 }

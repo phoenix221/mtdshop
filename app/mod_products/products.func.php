@@ -23,8 +23,9 @@ class ProductsController
 
         if(url(2) && url(3) == 'index'){
             d()->catalog = d()->Category->where('url = ?', url(2));
-            d()->title = d()->catalog->title;
+            d()->title_page = d()->catalog->title;
             d()->product_list = d()->Product->where('is_active = 1 and catalog_id LIKE ?', '%|'.d()->catalog->id.'|%')->order_by('sort desc');
+            d()->title = d()->catalog->title.' | '. d()->o->title;
             d()->content =  d()->products_list_tpl();
         }elseif(url(2) && url(3) && !url(4)){
             header("HTTP/1.1 301 Moved Permanently");
@@ -32,7 +33,8 @@ class ProductsController
             exit;
         }elseif(url(2) && url(3) && url(4) == 'index'){
             d()->this = d()->Product(url(3))->where('is_active = 1');
-            d()->title = d()->this->title;
+            d()->title_page = d()->this->title;
+            d()->title = d()->this->title.' | '. d()->o->title;
             d()->content = d()->product_view_tpl();
         }
     }

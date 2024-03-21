@@ -1596,6 +1596,7 @@ footer {
 }
 .block_points button {
   position: absolute;
+  top: 21px;
   right: 0;
   border: 1px solid #9f6dac;
   background: #9f6dac;
@@ -2032,6 +2033,79 @@ footer {
   border-radius: 20px;
   background-color: #7c3d8e;
   background-size: 24px;
+}
+
+.user_points_table, .user_order_table {
+  width: 100%;
+}
+
+.user_points_table_head, .user_order_table_head {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  border-bottom: 1px solid #e1e0e0;
+}
+.user_points_table_head td, .user_order_table_head td {
+  padding: 10px;
+  text-align: center;
+}
+.user_points_table_head td:first-child, .user_order_table_head td:first-child {
+  text-align: left;
+}
+
+.user_points_table_body, .user_order_table_body {
+  border-bottom: 1px solid #e1e0e0;
+}
+.user_points_table_body td, .user_order_table_body td {
+  padding: 10px;
+  text-align: center;
+}
+.user_points_table_body td:first-child, .user_order_table_body td:first-child {
+  text-align: left;
+}
+.user_points_table_body:last-child, .user_order_table_body:last-child {
+  border-bottom: none;
+}
+
+.user_order_table_body td {
+  height: 150px;
+}
+
+.count_points {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-bottom: 35px;
+}
+.count_points span {
+  font-size: 20px;
+  font-weight: 500;
+  color: #7c3d8e;
+}
+
+.table_cart {
+  display: inline-block;
+  text-align: left !important;
+  overflow: scroll;
+  margin: 10px 0;
+  padding: 0 10px !important;
+}
+.table_cart ul {
+  padding: 7px 0;
+  border-bottom: 1px solid #000;
+}
+.table_cart ul:last-child {
+  border-bottom: none;
+}
+.table_cart ul:first-child {
+  padding-top: 0;
+}
+.table_cart ul li span {
+  font-weight: 600;
+}
+
+.table_price {
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=finish.css.map */

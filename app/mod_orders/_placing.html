@@ -19,11 +19,11 @@
             <p>Доставка</p>
             <div class="customer_items">
                 <label for="address">Адресс доставки<span class="red">*</span></label>
-                <input type="text" name="address" id="address" placeholder="Россия, Республика Татарстан, Казань, ул. Татарстан, д. 1" value="" required>
+                <input type="text" name="address" id="address" placeholder="Россия, Республика Татарстан, Казань, ул. Татарстан, д. 1" value="{address}" required>
             </div>
             <div class="customer_items">
                 <label for="address_index">Индекс<span class="red">*</span></label>
-                <input type="text" onkeypress="return event.charCode >=48 && event.charCode<=57" name="address_index" id="address_index" value="" placeholder="422222" maxlength="6">
+                <input type="text" onkeypress="return event.charCode >=48 && event.charCode<=57" name="address_index" id="address_index" value="{address_index}" placeholder="422222" maxlength="6">
             </div>
         </div>
         <div class="customer_block">
@@ -67,9 +67,11 @@
                 <!--<li class="cb_total_items">
                     <p><span>Доставка:</span> {delivery_price} <i class="mdi mdi-currency-rub"></i></p>
                 </li>-->
-                <!--<li class="cb_total_items">
+                @if(d()->points_price):
+                <li class="cb_total_items">
                     <p><span>Оплата баллами:</span> {points_price} <i class="mdi mdi-currency-rub"></i></p>
-                </li>-->
+                </li>
+                @endif;
                 <li class="cb_total_items">
                     <p id="order_finish_price" data-price="{total_order_price}"><span>Итого:</span> {total_order_money} <i class="mdi mdi-currency-rub"></i></p>
                 </li>

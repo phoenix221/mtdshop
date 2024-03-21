@@ -35,8 +35,9 @@
     <div class="block_discount">
         <div class="block_points">
             <span class="points_ttl">Использовать баллы</span>
-            <input type="text" name="points" value="">
-            <button>Применить</button>
+            <input type="text" name="points" value="{points}">
+            <button onclick="add_points(this);">Применить</button>
+            <small id="points_error"></small>
         </div>
         <div class="total_price_cart">
             <span class="finish_price_ttl">Итого:</span>
