@@ -42,6 +42,8 @@ route('/ajax/service', 'main', 'ajax_service');
 route('/ajax/edit_user', 'main', 'ajax_edit_user');
 route('/ajax/add_points', 'main', 'ajax_add_points');
 
+//oute('/test_notifity', 'main', 'test_notifity');
+
 
 //route('/news/index', 'content', 'news#index');
 //route('/news/index', 'news#index');

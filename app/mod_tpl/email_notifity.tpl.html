@@ -13,12 +13,12 @@
         @endif;
         <li>Адрес: <strong>{order.address}</strong></li>
         <li>Индекс: <strong>{order.address_index}</strong></li>
-        <li>Телефон: <strong></strong>{order.phone}</strong></li>
+        <li>Телефон: <strong>{order.phone}</strong></li>
         <li>email: <strong>{order.email}</strong></li>
         <li>Итоговая цена: <strong>{order.finish_price} руб.</strong></li>
     </ul>
     <div class="cart">
-    @d()->cart = json_decode(d()->order->cart);
+    @d()->cart = json_decode(d()->order->cart,true);
     <ul>
         <p>Корзина:</p>
         <foreach cart as c>

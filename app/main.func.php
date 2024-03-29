@@ -189,7 +189,6 @@ function ajax_addcart(){
 }
 
 function ajax_create_order(){
-    $_SESSION['dbg'] = $_POST['data'];
     if($_POST['data']){
         $option = d()->Option(1);
         $data = explode('&', $_POST['data']);
@@ -643,4 +642,12 @@ function ajax_add_points(){
     $result['error'] = 'error';
     $result['text'] = 'Необходимо авторизоваться';
     return json_encode($result);
+}
+
+function test_notifity(){
+    if($_SESSION['admin'] == 'developer'){
+        d()->order = d()->Order(27);
+        d()->cart2 = json_decode(d()->order->cart, true);
+        print d()->email_notifity_tpl();
+    }
 }

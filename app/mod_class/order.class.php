@@ -26,7 +26,7 @@ class Order extends ActiveRecord
         }
     }
 
-    function cart(){
+    function cart_item(){
         $c = json_decode($this->get('cart'), true);
         $text = '';
         foreach ($c as $value){
