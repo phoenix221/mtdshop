@@ -46,6 +46,17 @@ class PagesController
 
 	function favorites(){
 		d()->title = 'Избраное | '. d()->o->title;
+		$favorites = '';
+		if(!$_SESSION['user']){
+			$favorites = $_COOKIE['favorites'];
+		}else{
+			$u = d()->User($_SESSION['user']);
+			$favorites = $u->favorites;
+		}
+		if($favorites){
+			d()->product_list = d()->Product->where('id IN ('.trim($favorites, ',').') and is_active = 1');
+		}
+
 	}
 }
 

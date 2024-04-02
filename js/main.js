@@ -392,3 +392,15 @@ function add_points(el){
 		}
 	});
 }
+
+function favorites(id){
+	let block = $('#favorites_'+id);
+	if(block.hasClass('active')){
+		var type = 'remove';
+		block.removeClass('active');
+	}else{
+		var type = 'add';
+		block.addClass('active');
+	}
+	$.post('/ajax/favorites_add', {id: id, type: type});
+}

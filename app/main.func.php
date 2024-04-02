@@ -81,6 +81,10 @@ function get_session(){
         print '<pre>';
         print_r($_SESSION);
         print '</pre>';
+        print '<hr>';
+        print '<pre>';
+        print_r($_COOKIE);
+        print '</pre>';
 
         print '<a href="?action=clear">Очистить сессию</a>';
         exit;
@@ -650,4 +654,55 @@ function test_notifity(){
         d()->cart2 = json_decode(d()->order->cart, true);
         print d()->email_notifity_tpl();
     }
+}
+
+function ajax_favorites_add(){
+    if($_POST['id'] && $_POST['type']){
+        $p = d()->Product($_POST['id']);
+        if(!$p->is_empty){
+            if(!$_SESSION['user']){
+                if(!$_COOKIE['favorites']){
+                    $str = $p->id.',';
+                    setcookie('favorites', $str, time()+60*60*24*365*10, '/');
+                }else{
+                    if($_POST['type'] == 'add'){
+                        $str = $_COOKIE['favorites'];
+                        $str .= $p->id.',';
+                        setcookie('favorites', $str, time()+60*60*24*365*10, '/');
+                    }else{
+                        $str2 = $_COOKIE['favorites'];
+                        $i = str_replace($p->id.',','',$str2);
+                        setcookie('favorites', $i, time()+60*60*24*365*10, '/');
+                    }
+                }
+            }else{
+                $u = d()->User($_SESSION['user']);
+                if(!$u->favorites){
+                    $u->favorites = $p->id.',';
+                }else{
+                    if($_POST['type'] == 'add'){
+                        $str = $u->favorites;
+                        $str .= $p->id.',';
+                        $u->favorites = $str;
+                    }else{
+                        $str2 = $u->favorites;
+                        $i2 = str_replace($p->id.',','',$str2);
+                        $u->favorites = $i2;
+                    }
+                }
+                $u->save;
+            }
+
+            if($_POST['type'] == 'add'){
+                $p->favorites = 1;
+            }else{
+                $p->favorites = 0;
+            }
+            $p->save;
+
+            print 'ok';
+            exit;
+        }
+    }
+    d()->page_not_found();
 }

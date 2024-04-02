@@ -41,6 +41,8 @@ route('/ajax/feedback', 'main', 'ajax_feedback');
 route('/ajax/service', 'main', 'ajax_service');
 route('/ajax/edit_user', 'main', 'ajax_edit_user');
 route('/ajax/add_points', 'main', 'ajax_add_points');
+route('/ajax/favorites_add', 'main', 'ajax_favorites_add');
+route('/ajax/favorites_remove', 'main', 'ajax_favorites_remove');
 
 //oute('/test_notifity', 'main', 'test_notifity');
 

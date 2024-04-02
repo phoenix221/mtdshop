@@ -35,10 +35,15 @@
                     <button onclick="count_minus(this);"><i class="mdi mdi-minus"></i></button>
                 </div>
                 <button class="btn-cart-product" onclick="addcart(this, 'add');">В корзину</button>
+                @if(d()->this->favorites):
+                <button id="favorites_{.id}" class="favorites_block_products active" onclick="favorites({.id})">В избранное</button>
+                @else:
+                <button id="favorites_{.id}" class="favorites_block_products" onclick="favorites({.id})">В избранное</button>
+                @endif;
             </div>
         </li>
     </foreach>
 </ul>
-@if(d()->product_list->is_empty):
+@if(!d()->product_list):
 <p class="mt-30">Ничего не найдено</p>
 @endif;

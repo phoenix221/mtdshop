@@ -3,6 +3,15 @@
         <li class="show_products_items" data-id="{.id}">
             <div class="items-img">
                 <img src="{.image}" alt="">
+                <div class="favorites_block">
+                    @if(d()->this->favorites):
+                    <p onclick="favorites({.id});"><i id="favorites_{.id}" class="mdi mdi-heart active"></i></p>
+                    <span class="tooltiptext_favorites">Убрать из избранного</span>
+                    @else:
+                    <p onclick="favorites({.id});"><i id="favorites_{.id}" class="mdi mdi-heart-outline"></i></p>
+                    <span class="tooltiptext_favorites">Добавить в избранное</span>
+                    @endif;
+                </div>
             </div>
             <a href="{.main_link}" class="items-title">{.title}</a>
             <p class="items-price">{.money} <span class="mdi mdi-currency-rub"></span></p>
