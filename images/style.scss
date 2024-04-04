@@ -19,6 +19,7 @@ $color1: #7c3d8e;
 $color2: #393185;
 $color3: #9f6dac;
 $color4: #e1e0e0;
+$color5: #239e12;
 %size16{
     font-size: 16px;
     line-height: 20px;
@@ -742,6 +743,11 @@ footer{
         font-weight: 500;
     }
 }
+.cart-count-products{
+    span{
+        color: $color5;
+    }
+}
 .cart-price, .cart-price span{
     font-size: 18px;
     font-weight: 600;
@@ -1117,7 +1123,7 @@ footer{
     align-items: flex-start;
     flex-wrap: wrap;
     li{
-        height: 280px;
+        height: 300px;
         @media (max-width: 768px){
             margin: 10px 0;
         }
@@ -1172,7 +1178,7 @@ footer{
     font-weight: 500;
     line-height: 18px;
     color: $color1;
-    margin: 10px 0;
+    margin: 10px 0 0 0;
     display: inline-block;
 }
 .items-price{

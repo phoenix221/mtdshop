@@ -117,9 +117,16 @@ function brand_slider(){
 
 function count_plus(elem){
 	let wrap = $(elem).parent('.amount');
+	let count_product = wrap.data('count');
 	let id = wrap.data('id');
 	let count = wrap.find("input").val();
-	let sum = parseInt(count)+1;
+	console.log(count_product);
+	console.log(count);
+	if(count < count_product){
+		var sum = parseInt(count)+1;
+	}else{
+		var sum = count;
+	}
 	$('input[name=count_'+id+']').val(sum);
 }
 
@@ -138,17 +145,22 @@ function count_plus_cart(elem){
 	let wrap = $(elem).parent('.amount_cart');
 	let block = $(wrap).closest('li');
 	let id = block.data('id');
+	let count_product = block.data('count');
 	let count = wrap.find("input").val();
-	let sum = parseInt(count)+1;
-	$('input[name=count_'+id+']').val(sum);
-	let price = $('#price_'+id).data('price');
-	let total_price = $('#total_price_'+id);
-	let finish = $('#finish_price').data('price');
-	let total = price*sum;
-	total_price.html(total.toLocaleString()+' <i class="mdi mdi-currency-rub"></i>').data('price', total);
-	finish = finish+price;
-	$('#finish_price').html(finish.toLocaleString()+' <i class="mdi mdi-currency-rub"></i>').data('price', finish);
-	addcart(elem, 'plus');
+	if(count < count_product){
+		var sum = parseInt(count)+1;
+		$('input[name=count_'+id+']').val(sum);
+		let price = $('#price_'+id).data('price');
+		let total_price = $('#total_price_'+id);
+		let finish = $('#finish_price').data('price');
+		let total = price*sum;
+		total_price.html(total.toLocaleString()+' <i class="mdi mdi-currency-rub"></i>').data('price', total);
+		finish = finish+price;
+		$('#finish_price').html(finish.toLocaleString()+' <i class="mdi mdi-currency-rub"></i>').data('price', finish);
+		addcart(elem, 'plus');
+	}else{
+		var sum = count;
+	}
 }
 
 function count_minus_cart(elem){
@@ -320,28 +332,39 @@ function logout_user(){
 
 function feedback(text){
 	let fd = $('#'+text).serialize();
-	let hint = $('#error_text');
+	let hint = $('#error_text_feedback');
 	$.post('/ajax/feedback', {data: fd}, function(result){
+		console.log(result);
 		let r = JSON.parse(result);
 		if(r['error'] == 'error'){
-			hint.html(r['text']).addClass('error');
+			hint.html(r['text']).addClass('alert alert-danger');
 		}
 		if(r['error'] == 'sucsses'){
-			hint.html(r['text']).addClass('sucsses');
+			if(hint.hasClass('alert-danger')){
+				hint.html(r['text']).removeClass('alert-danger').addClass('alert-success');
+			}else{
+				hint.html(r['text']).addClass('alert alert-success');
+			}
+			$('#feedback_form').hide();
 		}
 	});
 }
 
 function service(text){
 	let sd = $('#'+text).serialize();
-	let hint = $('#error_text');
+	let hint = $('#error_text_service');
 	$.post('/ajax/service', {data: sd}, function(result){
 		let r = JSON.parse(result);
 		if(r['error'] == 'error'){
-			hint.html(r['text']).addClass('error');
-		}
+			hint.html(r['text']).addClass('alert alert-danger');
+		} 
 		if(r['error'] == 'sucsses'){
-			hint.html(r['text']).addClass('sucsses');
+			if(hint.hasClass('alert-danger')){
+				hint.html(r['text']).removeClass('alert-danger').addClass('alert-success');
+			}else{
+				hint.html(r['text']).addClass('alert alert-success');
+			}
+			$('#service_form').hide();
 		}
 	});
 }

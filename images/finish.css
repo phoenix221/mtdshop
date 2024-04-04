@@ -843,6 +843,10 @@ footer {
   }
 }
 
+.cart-count-products span {
+  color: #239e12;
+}
+
 .cart-price, .cart-price span {
   font-size: 18px;
   font-weight: 600;
@@ -1273,7 +1277,7 @@ footer {
   flex-wrap: wrap;
 }
 #main_products_show ul li {
-  height: 280px;
+  height: 300px;
 }
 @media (max-width: 768px) {
   #main_products_show ul li {
@@ -1340,7 +1344,7 @@ footer {
   font-weight: 500;
   line-height: 18px;
   color: #7c3d8e;
-  margin: 10px 0;
+  margin: 10px 0 0 0;
   display: inline-block;
 }
 

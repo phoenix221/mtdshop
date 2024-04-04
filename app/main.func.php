@@ -173,7 +173,8 @@ function ajax_addcart(){
                     'price' => $product->price,
                     'count' => $_POST['count'],
                     'total_price' => $total_price,
-                    'image' => $product->image
+                    'image' => $product->image,
+                    'col' => $product->col
                 );
             }
         }
@@ -517,7 +518,7 @@ function ajax_feedback(){
             d()->Mail->send();
         }
         $res['error'] = 'sucsses';
-        $res['test'] = 'Заявка на звонок успешно отправлено. В ближайшее время с Вами свяжется менеджер';
+        $res['text'] = 'Заявка на звонок успешно отправлено. В ближайшее время с Вами свяжется менеджер';
         return json_encode($res);
     }
 }
@@ -560,7 +561,7 @@ function ajax_service(){
             d()->Mail->send();
         }
         $res['error'] = 'sucsses';
-        $res['test'] = 'Заявка на звонок успешно отправлено. В ближайшее время с Вами свяжется менеджер';
+        $res['text'] = 'Заявка на услугу успешно отправлено. В ближайшее время с Вами свяжется менеджер';
         return json_encode($res);
     }
 }

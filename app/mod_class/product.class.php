@@ -25,5 +25,12 @@ class Product extends ActiveRecord
 		$category = d()->Category->where('id = ?', trim($this->get('catalog_id'),'|'));
 		return 'catalog/'.$category->url.'/'.$this->get('url').'/';
 	}
+
+	function count_product(){
+		if($this->get('col')){
+			return $this->get('col').' шт.';
+		}
+		return 'Нет в наличии';
+	}
 }
 

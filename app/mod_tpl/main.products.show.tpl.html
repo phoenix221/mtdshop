@@ -13,10 +13,13 @@
                     @endif;
                 </div>
             </div>
-            <a href="{.main_link}" class="items-title">{.title}</a>
+            <div>
+                <a href="{.main_link}" class="items-title">{.title}</a>
+                <p class="cart-count-products">Количество: <span>{.count_product}</span></p>
+            </div>
             <p class="items-price">{.money} <span class="mdi mdi-currency-rub"></span></p>
             <div class="block-addcart">
-                <div class="amount" data-id="{.id}">
+                <div class="amount" data-id="{.id}" data-count="{.col}">
                     <button onclick="count_plus(this);"><i class="mdi mdi-plus"></i></button>
                     <input type="text" name="count_{.id}" value="1">
                     <button onclick="count_minus(this);"><i class="mdi mdi-minus"></i></button>

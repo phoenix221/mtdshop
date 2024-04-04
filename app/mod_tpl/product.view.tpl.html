@@ -3,6 +3,7 @@
     <div class="view-block-btn">
         <ul>
             <li><p>{.money} <i class="mdi mdi-currency-rub"></i></p></li>
+            <li class="cart-count-products">Количество: <span>{.count_product}</span></li>
             <li><a href="#description">Описание</a></li>
             <li><a href="#characteristics">Характеристики</a></li>
         </ul>
@@ -10,7 +11,7 @@
 </div>
 <hr>
 <div class="product-view-2">
-    <div class="amount" data-id="{.id}">
+    <div class="amount" data-id="{.id}" data-count="{.col}">
         <button onclick="count_plus(this);"><i class="mdi mdi-plus"></i></button>
         <input type="text" name="count_{.id}" value="1">
         <button onclick="count_minus(this);"><i class="mdi mdi-minus"></i></button>
