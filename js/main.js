@@ -117,16 +117,10 @@ function brand_slider(){
 
 function count_plus(elem){
 	let wrap = $(elem).parent('.amount');
-	let count_product = wrap.data('count');
+	//let count_product = wrap.data('count');
 	let id = wrap.data('id');
 	let count = wrap.find("input").val();
-	console.log(count_product);
-	console.log(count);
-	if(count < count_product){
-		var sum = parseInt(count)+1;
-	}else{
-		var sum = count;
-	}
+	let sum = parseInt(count)+1;
 	$('input[name=count_'+id+']').val(sum);
 }
 
@@ -145,22 +139,18 @@ function count_plus_cart(elem){
 	let wrap = $(elem).parent('.amount_cart');
 	let block = $(wrap).closest('li');
 	let id = block.data('id');
-	let count_product = block.data('count');
+	//let count_product = block.data('count');
 	let count = wrap.find("input").val();
-	if(count < count_product){
-		var sum = parseInt(count)+1;
-		$('input[name=count_'+id+']').val(sum);
-		let price = $('#price_'+id).data('price');
-		let total_price = $('#total_price_'+id);
-		let finish = $('#finish_price').data('price');
-		let total = price*sum;
-		total_price.html(total.toLocaleString()+' <i class="mdi mdi-currency-rub"></i>').data('price', total);
-		finish = finish+price;
-		$('#finish_price').html(finish.toLocaleString()+' <i class="mdi mdi-currency-rub"></i>').data('price', finish);
-		addcart(elem, 'plus');
-	}else{
-		var sum = count;
-	}
+	let sum = parseInt(count)+1;
+	$('input[name=count_'+id+']').val(sum);
+	let price = $('#price_'+id).data('price');
+	let total_price = $('#total_price_'+id);
+	let finish = $('#finish_price').data('price');
+	let total = price*sum;
+	total_price.html(total.toLocaleString()+' <i class="mdi mdi-currency-rub"></i>').data('price', total);
+	finish = finish+price;
+	$('#finish_price').html(finish.toLocaleString()+' <i class="mdi mdi-currency-rub"></i>').data('price', finish);
+	addcart(elem, 'plus');
 }
 
 function count_minus_cart(elem){

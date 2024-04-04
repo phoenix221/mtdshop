@@ -27,10 +27,7 @@ class Product extends ActiveRecord
 	}
 
 	function count_product(){
-		if($this->get('col')){
-			return $this->get('col').' шт.';
-		}
-		return 'Нет в наличии';
+		return $this->get('col');
 	}
 }
 
